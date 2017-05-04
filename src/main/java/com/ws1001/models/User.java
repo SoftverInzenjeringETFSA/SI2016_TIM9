@@ -1,64 +1,64 @@
 package com.ws1001.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "korisnici")
 public class User extends Model {
-	private String ime;
-	private String prezime;
-	private String korisnicko_ime;
-	private String lozinka;
-	private byte tip;
+	@Column(name = "ime")
+	private String firstName;
 	
-	public User(String ime, String prezime, String korisnicko_ime, String lozinka, byte tip) {
-		this.ime = ime;
-		this.prezime = prezime;
-		this.korisnicko_ime = korisnicko_ime;
-		this.lozinka = lozinka;
-		this.tip = tip;
-	}
-
-	public String getIme() {
-		return ime;
-	}
-
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
-	public String getPrezime() {
-		return prezime;
-	}
-
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-
-	public String getKorisnicko_ime() {
-		return korisnicko_ime;
-	}
-
-	public void setKorisnicko_ime(String korisnicko_ime) {
-		this.korisnicko_ime = korisnicko_ime;
-	}
-
-	public String getLozinka() {
-		return lozinka;
-	}
-
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
-	}
-
-	public byte getTip() {
-		return tip;
-	}
-
-	public void setTip(byte tip) {
-		this.tip = tip;
-	}
+	@Column(name = "prezime")
+	private String lastName;
 	
+	@Column(name = "korisnicko_ime")
+	private String username;
 	
+	@Column(name = "lozinka")
+	private String password;
+	
+	@Column(name = "tip")
+	private byte type;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public byte getType() {
+		return type;
+	}
+
+	public void setType(byte type) {
+		this.type = type;
+	}
 }

@@ -29,6 +29,10 @@ nbdist/
 .project
 .settings/
 
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
 # Mac
 .DS_Store
 

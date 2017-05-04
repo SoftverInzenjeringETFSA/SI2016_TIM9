@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>rs</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Rezervacija sala</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

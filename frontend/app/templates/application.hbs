@@ -5,6 +5,9 @@
 	<li>{{#link-to 'sale'}}Sale{{/link-to}}</li>
 	<li>{{#link-to 'inventar'}}Inventar{{/link-to}}</li>
 	<li>{{#link-to 'izvjestaji'}}Izvjestaji{{/link-to}}</li>
+	{{#if session.isAuthenticated}}
+	<li class="logout"><button {{action 'invalidateSession'}}>Log out</button> </li>
+	{{/if}}
 </ul>
  
 

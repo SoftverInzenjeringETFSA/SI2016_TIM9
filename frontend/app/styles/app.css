@@ -30,3 +30,7 @@ ul.navigation li:hover:not(.active) {
 .active {
     background-color: transparent;
 }
+
+li.logout {
+    float: right;
+}

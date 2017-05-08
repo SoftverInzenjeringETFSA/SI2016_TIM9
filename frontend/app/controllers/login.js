@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
 	authenticationError: "",
 	actions: {
 		authenticate: function() {
-			var credentials = this.getProperties('identification', 'password'), authenticator = 'authenticator:jwt';
+			var credentials = this.getProperties('identification', 'password'), authenticator = 'authenticator:custom';
 			
 			this.set('validationError','');
 

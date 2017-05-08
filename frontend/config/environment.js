@@ -24,6 +24,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.host = 'http://localhost:8080'
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -48,23 +49,10 @@ module.exports = function(environment) {
 
   //konfiguracija autorizatora zahtjeva (authorizer)
   ENV['ember-simple-auth'] = {
-    authorizer: 'authorizer:token'
+    authorizer: 'authorizer:custom',
+    routeAfterAuthentication: '/',
+    crossOriginWhitelist: ['http://localhost:8080']
   };
-
-  ENV['ember-simple-auth-token'] = {
-  serverTokenEndpoint: 'http://localhost:8080/auth',
-  identificationField: 'username',
-  passwordField: 'password',
-  tokenPropertyName: 'token',
-  refreshTokenPropertyName: 'refresh_token',
-  authorizationPrefix: 'Bearer ',
-  authorizationHeaderName: 'Authorization',
-  headers: {},
-  refreshAccessTokens: true,
-  serverTokenRefreshEndpoint: 'http://localhost:8080/auth',
-  tokenExpireName: 'exp',
-  refreshLeeway: 0
-};
 
   return ENV;
 };

@@ -5,22 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 
-
+import java.sql.Time;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "kvarovi")
 public class Kvar extends Model {
 
 @ManyToOne(targetEntity=Sala.class)
-    @JoinColumn(name="id")
+   // @JoinColumn(name="id")
     private Sala sala;
 
-@OneToMany(nullable = true)
-private List<Korisnik> uocioNastavnik = new ArrayList<>();
+@OneToMany //(nullable = true)
+private List<User> uocioNastavnik = new ArrayList<>();
 
-@OneToMany(nullable = true)
-private List<Rezervacija> rezervacija = new ArrayList<>();
+//@OneToMany(nullable = true)
+//private List<Rezervacija> rezervacija = new ArrayList<>();
 
 @Column(name = "opis")
 	private String opis;

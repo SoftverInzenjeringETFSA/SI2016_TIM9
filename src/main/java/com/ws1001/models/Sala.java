@@ -5,13 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
 
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "sale")
 public class Sala extends Model {
 
-@OneToMany(nullable = true)
-private List<Korisnik> odgovorniNastavnik = new ArrayList<>();
+@OneToMany //(nullable = true)
+private List<User> odgovorniNastavnik = new ArrayList<>();
 
 @Column(name="naziv", unique = true)
 	private String naziv;	
@@ -35,7 +37,7 @@ public String getNaziv() {
 		return naziv;
 	}
 
-public void setNaziv(Sala naziv) {
+public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}
 

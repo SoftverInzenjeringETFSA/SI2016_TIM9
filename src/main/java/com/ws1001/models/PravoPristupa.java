@@ -6,6 +6,8 @@ import javax.persistence.Table;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "prava_pristupa")

@@ -1,6 +1,9 @@
 package com.ws1001.models;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
@@ -16,5 +19,23 @@ public class PravoPristupa extends Model {
 
     @OneToOne
     private User korisnik;
+
+    public User getKorisnik() {
+		return korisnik;
+	    }
+
+    public void setKorisnik(User korisnik) {
+		this.korisnik = korisnik;
+	    }
+
+	public List<Sala> getSale() {
+		return sale;
+	    }
+
+    public void setSale(List<Sala> sale) {
+		this.sale = sale;
+	    }
+
+
 	
 }

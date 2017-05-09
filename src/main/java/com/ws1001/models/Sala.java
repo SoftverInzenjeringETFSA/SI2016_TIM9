@@ -1,5 +1,8 @@
 package com.ws1001.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,8 +13,8 @@ import javax.persistence.OneToMany;
 @Table(name = "sale")
 public class Sala extends Model {
 
-@OneToMany(nullable = true)
-private List<Korisnik> odgovorniNastavnik = new ArrayList<>();
+@OneToMany//(nullable = true)
+private List<User> odgovorniNastavnici = new ArrayList<>();
 
 @Column(name="naziv", unique = true)
 	private String naziv;	
@@ -30,12 +33,21 @@ private List<Korisnik> odgovorniNastavnik = new ArrayList<>();
 
 @Column(name="brojZaduzenihKljuceva")
 	private Integer brojZaduzenihKljuceva;	
+
+public List<User> getOdgovorniNastavnici() {
+		return odgovorniNastavnici;
+	}
+
+public void setOdgovorniNastavnici(List<User> odgovorniNastavnici) {
+		this.odgovorniNastavnici = odgovorniNastavnici;
+	}
+
 	
 public String getNaziv() {
 		return naziv;
 	}
 
-public void setNaziv(Sala naziv) {
+public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}
 

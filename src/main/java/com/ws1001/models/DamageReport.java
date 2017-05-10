@@ -66,6 +66,7 @@ public class DamageReport extends Model {
 		this.reportedAt = reportedAt;
 	}
 
+	@Column(nullable = false)
 	public boolean wasRepotedSubsequently() {
 		return repotedSubsequently;
 	}

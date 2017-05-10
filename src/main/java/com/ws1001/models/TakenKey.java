@@ -16,7 +16,7 @@ public class TakenKey extends Model {
 	private Date takenAt;
 	private Date returnedAt;
 
-	@OneToOne
+	@OneToOne(optional = false)
 	public Reservation getReservation() {
 		return reservation;
 	}

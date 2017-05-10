@@ -1,5 +1,6 @@
 package com.ws1001.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -28,7 +29,8 @@ public class ClassroomEquipment extends Model {
 	public void setEquipmentType(EquipmentType equipmentType) {
 		this.equipmentType = equipmentType;
 	}
-	
+
+	@Column(nullable = false)
 	public int getQuantity() {
 		return quantity;
 	}

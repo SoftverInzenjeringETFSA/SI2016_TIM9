@@ -58,6 +58,7 @@ public class User extends Model {
 		this.password = password;
 	}
 
+	@Column(nullable = false)
 	public UserType getType() {
 		return type;
 	}

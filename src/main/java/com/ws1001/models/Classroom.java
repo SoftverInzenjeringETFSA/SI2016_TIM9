@@ -45,6 +45,7 @@ public class Classroom extends Model {
 		this.teacherInCharge = teacherInCharge;
 	}
 
+	@Column(nullable = false)
 	public ClassroomType getType() {
 		return type;
 	}
@@ -53,6 +54,7 @@ public class Classroom extends Model {
 		this.type = type;
 	}
 
+	@Column(nullable = false)
 	public StatusType getStatus() {
 		return status;
 	}
@@ -61,6 +63,7 @@ public class Classroom extends Model {
 		this.status = status;
 	}
 
+	@Column(nullable = false)
 	public int getSeatCount() {
 		return seatCount;
 	}
@@ -69,6 +72,7 @@ public class Classroom extends Model {
 		this.seatCount = seatCount;
 	}
 
+	@Column(nullable = false)
 	public int getKeyCount() {
 		return keyCount;
 	}
@@ -77,6 +81,7 @@ public class Classroom extends Model {
 		this.keyCount = keyCount;
 	}
 
+	@Column(nullable = false)
 	public int getTakenKeyCount() {
 		return takenKeyCount;
 	}

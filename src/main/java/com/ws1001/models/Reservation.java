@@ -55,6 +55,7 @@ public class Reservation extends Model {
 		this.reservedAt = reservedAt;
 	}
 
+	@Column(nullable = false)
 	public byte getDuration() {
 		return duration;
 	}

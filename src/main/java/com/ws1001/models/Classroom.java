@@ -12,10 +12,13 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Classroom extends Model {
+	public enum ClassroomType { Ordinary, Amphitheater, Laboratory, Office };
+	public enum StatusType { InUse, Nonfunctional, WorkInProgess };
+
 	private String name;
 	private User teacherInCharge;
-	private byte type;
-	private byte status;
+	private ClassroomType type;
+	private StatusType status;
 	private int seatCount;
 	private int keyCount;
 	private int takenKeyCount;
@@ -42,19 +45,19 @@ public class Classroom extends Model {
 		this.teacherInCharge = teacherInCharge;
 	}
 
-	public byte getType() {
+	public ClassroomType getType() {
 		return type;
 	}
 
-	public void setType(byte type) {
+	public void setType(ClassroomType type) {
 		this.type = type;
 	}
 
-	public byte getStatus() {
+	public StatusType getStatus() {
 		return status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(StatusType status) {
 		this.status = status;
 	}
 

@@ -11,11 +11,13 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class User extends Model {
+	public enum UserType { Teacher, Operator, Admin };
+
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String password;
-	private byte type;
+	private UserType type;
 	private List<AccessGrant> accessGrants = new ArrayList<AccessGrant>();
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 	private List<DamageReport> damageReports = new ArrayList<DamageReport>();
@@ -56,11 +58,11 @@ public class User extends Model {
 		this.password = password;
 	}
 
-	public byte getType() {
+	public UserType getType() {
 		return type;
 	}
 
-	public void setType(byte type) {
+	public void setType(UserType type) {
 		this.type = type;
 	}
 	

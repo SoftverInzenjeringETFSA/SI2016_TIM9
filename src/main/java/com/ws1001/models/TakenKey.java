@@ -8,7 +8,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -17,7 +16,7 @@ public class TakenKey extends Model {
 	private Date takenAt;
 	private Date returnedAt;
 
-	@OneToOne(optional = false)
+	@OneToOne
 	public Reservation getReservation() {
 		return reservation;
 	}
@@ -28,7 +27,6 @@ public class TakenKey extends Model {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-	@NotNull
 	public Date getTakenAt() {
 		return takenAt;
 	}

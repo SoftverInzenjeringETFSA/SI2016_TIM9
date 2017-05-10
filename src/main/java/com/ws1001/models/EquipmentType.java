@@ -3,8 +3,6 @@ package com.ws1001.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -13,7 +11,6 @@ public class EquipmentType extends Model {
 	private String name;
 
 	@Column(unique = true, nullable = false)
-	@NotNull
 	public int getLabel() {
 		return label;
 	}
@@ -23,8 +20,6 @@ public class EquipmentType extends Model {
 	}
 
 	@Column(nullable = false)
-	@NotNull
-	@Size(min = 1)
 	public String getName() {
 		return name;
 	}

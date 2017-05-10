@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -31,8 +28,6 @@ public class Classroom extends Model {
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 
 	@Column(unique = true, nullable = false)
-	@NotNull
-	@Size(min = 1)
 	public String getName() {
 		return name;
 	}
@@ -50,8 +45,6 @@ public class Classroom extends Model {
 		this.teacherInCharge = teacherInCharge;
 	}
 
-	@Column(nullable = false)
-	@NotNull
 	public ClassroomType getType() {
 		return type;
 	}
@@ -60,8 +53,6 @@ public class Classroom extends Model {
 		this.type = type;
 	}
 
-	@Column(nullable = false)
-	@NotNull
 	public StatusType getStatus() {
 		return status;
 	}
@@ -70,9 +61,6 @@ public class Classroom extends Model {
 		this.status = status;
 	}
 
-	@Column(nullable = false)
-	@NotNull
-	@Min(1)
 	public int getSeatCount() {
 		return seatCount;
 	}
@@ -81,9 +69,6 @@ public class Classroom extends Model {
 		this.seatCount = seatCount;
 	}
 
-	@Column(nullable = false)
-	@NotNull
-	@Min(1)
 	public int getKeyCount() {
 		return keyCount;
 	}
@@ -92,9 +77,6 @@ public class Classroom extends Model {
 		this.keyCount = keyCount;
 	}
 
-	@Column(nullable = false)
-	@NotNull
-	@Min(0)
 	public int getTakenKeyCount() {
 		return takenKeyCount;
 	}

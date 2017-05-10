@@ -8,8 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -57,9 +55,6 @@ public class Reservation extends Model {
 		this.reservedAt = reservedAt;
 	}
 
-	@Column(nullable = false)
-	@NotNull
-	@Min(1)
 	public byte getDuration() {
 		return duration;
 	}

@@ -9,6 +9,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -48,6 +50,8 @@ public class DamageReport extends Model {
 	}
 
 	@Column(length = 2048, nullable = false)
+	@NotNull
+	@Size(min = 1)
 	public String getDescription() {
 		return description;
 	}
@@ -66,6 +70,8 @@ public class DamageReport extends Model {
 		this.reportedAt = reportedAt;
 	}
 
+	@Column(nullable = false)
+	@NotNull
 	public boolean wasRepotedSubsequently() {
 		return repotedSubsequently;
 	}

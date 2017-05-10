@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -23,6 +26,8 @@ public class User extends Model {
 	private List<DamageReport> damageReports = new ArrayList<DamageReport>();
 
 	@Column(nullable = false)
+	@NotNull
+	@Pattern(regexp = "[a-z]+")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -32,6 +37,8 @@ public class User extends Model {
 	}
 
 	@Column(nullable = false)
+	@NotNull
+	@Pattern(regexp = "[a-z]+")
 	public String getLastName() {
 		return lastName;
 	}
@@ -41,6 +48,8 @@ public class User extends Model {
 	}
 
 	@Column(unique = true, nullable = false)
+	@NotNull
+	@Pattern(regexp = "[a-z0-9]+")
 	public String getUsername() {
 		return username;
 	}
@@ -50,6 +59,8 @@ public class User extends Model {
 	}
 
 	@Column(nullable = false)
+	@NotNull
+	@Size(min = 6)
 	public String getPassword() {
 		return password;
 	}
@@ -58,6 +69,8 @@ public class User extends Model {
 		this.password = password;
 	}
 
+	@Column(nullable = false)
+	@NotNull
 	public UserType getType() {
 		return type;
 	}

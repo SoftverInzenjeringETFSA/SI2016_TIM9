@@ -1,10 +1,9 @@
 <!--nije bootstrap nego ja nabacao css-a-->
-<ul class="navigation">
-	<li>{{#link-to 'korisnici'}}Korisnici{{/link-to}}</li>
-	<li>{{#link-to 'rasporedi'}}Rasporedi{{/link-to}}</li>
-	<li>{{#link-to 'sale'}}Sale{{/link-to}}</li>
-	<li>{{#link-to 'inventar'}}Inventar{{/link-to}}</li>
-	<li>{{#link-to 'izvjestaji'}}Izvjestaji{{/link-to}}</li>
+<ul class="navigation-tmp">
+	<li>{{#link-to 'users'}}Korisnici{{/link-to}}</li>
+	<li>{{#link-to 'classrooms'}}Sale{{/link-to}}</li>
+	<li>{{#link-to 'inventory'}}Inventar{{/link-to}}</li>
+	<li>{{#link-to 'reports'}}Izvjestaji{{/link-to}}</li>
 	{{#if session.isAuthenticated}}
 	<li class="logout"><button {{action 'invalidateSession'}}>Log out</button> </li>
 	{{/if}}

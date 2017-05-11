@@ -1,3 +1,33 @@
 <!--Korisnicima upravlja administrator, on kreira korisnicke racune,mjenja, brise. -->
 
 {{outlet}}
+
+
+
+   <!--Za ovaj meni treba podesit sljedece: - razlicite privilegije korisnika vide razlicite stvari  TREBAO BI SE NALAZIT NA POZICIJI 1-->
+<!-- ovaj dio zakomentarisani NE RADI
+   {{#if session.isAuthenticated}}
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">{{#link-to 'classroom'}}Sale{{/link-to}}<span class="sr-only">(current)</span></a></li>
+       {{#if (eq currentUser.role "NASTAVNIK")}}
+                            <i aria-hidden="false"></i>
+                            {{else}}
+                            <i aria-hidden="true"></i>
+                            {{/if}}
+        <li><a href="#">Kljucevi</a></li>
+        {{#if (eq currentUser.role "ADMIN")}}
+                            <i aria-hidden="false"></i>
+                            {{else}}
+                            <i aria-hidden="true"></i>
+                            {{/if}}
+        <li>{{#link-to 'inventory'}}Inventar{{/link-to}}</li>
+         {{#if (eq currentUser.role "ADMIN")}}
+                            <i aria-hidden="false"></i>
+                            {{else}}
+                            <i aria-hidden="true"></i>
+                            {{/if}}
+        <li>{{#link-to 'reports'}}Izvjestaji{{/link-to}}</li>
+        </ul>
+
+-->

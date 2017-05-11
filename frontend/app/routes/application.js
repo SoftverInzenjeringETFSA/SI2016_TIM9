@@ -8,5 +8,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 		invalidateSession: function(){
 			this.get('session').invalidate();
 		},
-	}
+	},
+    renderTemplate: function() {
+        // Treba dodati kondicionalno prikazivanje ovisno o prijavi korisnika
+        // Kad nije prijavljen: this.render('login')
+        this.render('layouts/logged-in');
+    }
 });

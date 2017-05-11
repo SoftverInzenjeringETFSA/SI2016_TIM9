@@ -1,29 +1,32 @@
-<!-- Nakon klika na "Prijavi se" poziva se funkcija
- "authenticate" iz kontrolera "controllers/login.js -->
-
-<div class="panel panel-primary">
- <div class="panel-heading" id="signin">Prijavi se
- </div>
-
- <div class="panel-body">
- 
-<form {{action 'authenticate' on='submit'}}>
-  <div class="form-group">
-    <label for="identification">Korisničko ime</label>
-    <br>
-    <input type="username" class="form-control" id="identification"  placeholder="Korisničko ime">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="login">
+        <img src="images/etf.png" alt="ETF" class="logo">
+        <div class="panel panel-primary panel-login">
+          <div class="panel-body">
+            <form {{action 'authenticate' on='submit'}}>
+              <div class="form-group">
+                {{#if validationError}}
+                  <p class="alert alert-danger">{{validationError}}</p>
+                {{/if}}
+                {{#if authenticationError}}
+                  <p class="alert alert-danger">{{authenticationError}}</p>
+                {{/if}}
+                <label for="username">Korisničko ime</label>
+                <input type="username" class="form-control" id="username"  placeholder="Korisničko ime">
+              </div>
+              <div class="form-group">
+                <label for="password">Lozinka</label>
+                <input type="password" class="form-control" id="password"  placeholder="Lozinka">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Prijavi se</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="password">Lozinka</label>
-    <input type="password" class="form-control" id="password"  placeholder="Lozinka">
-  </div>
-  <button type="submit" class="btn btn-default">Prijavi se</button>
-  <br>
-  <br>
-  <p>{{validationError}}</p>
-  <p>{{authenticationError}}</p>
-</form>
-
-
- </div>
 </div>

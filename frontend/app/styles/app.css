@@ -1,20 +1,10 @@
-/* Application css*/
-.navbar-header
-{
-    width: 15%;
+.login .logo {
+    margin: 0 auto;
+    width: 76px;
+    height: 76px;
+    display: block;
 }
 
-/*Login css*/
-.panel-primary
-{
-    margin-top: 5%;
-    margin-left: 25%;
-    margin-right: 25%;
-    width:50%;
-    padding-top: 2%;
-}
-#signin
-{
-    text-align: center;
-
+.panel-login {
+    margin-top: 25%;
 }

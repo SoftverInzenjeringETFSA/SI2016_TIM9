@@ -12,3 +12,7 @@ body {
 .panel-login {
     margin-top: 25%;
 }
+
+.title-buttons-right {
+    line-height: 69px;
+}

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -92,5 +93,23 @@ public class User extends Model {
 
 	public void setDamageReports(List<DamageReport> damageReports) {
 		this.damageReports = damageReports;
+	}
+
+	//zelimo da Hibernate ignorira ovu metodu
+	@Transient
+	public String getRole() {
+		String result = null;
+		switch (this.type){
+			case Teacher:
+				result = "ROLE_TEACHER";
+				break;
+			case Operator:
+				result = "ROLE_OPERATOR";
+				break;
+			case Admin:
+				result = "ROLE_ADMIN";
+				break;
+		}
+		return result;
 	}
 }

@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ws1001.models.Credentials;
+import java.util.logging.Logger;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -24,12 +27,16 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     setAuthenticationManager(authManager);
   }
 
+  static Logger logger = Logger.getLogger(JWTLoginFilter.class.getName());
+
   @Override
   public Authentication attemptAuthentication(
       HttpServletRequest req, HttpServletResponse res)
       throws AuthenticationException, IOException, ServletException {
     Credentials creds = new ObjectMapper()
         .readValue(req.getInputStream(), Credentials.class);
+    
+    logger.info(creds.getUsername() + " " + creds.getPassword());        
 
     return getAuthenticationManager().authenticate(
         new UsernamePasswordAuthenticationToken(

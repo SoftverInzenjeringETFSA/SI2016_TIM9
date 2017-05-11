@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('classrooms');
   this.route('reports');
   this.route('inventory');
+  this.route('loged-in')
 });
 
 export default Router;

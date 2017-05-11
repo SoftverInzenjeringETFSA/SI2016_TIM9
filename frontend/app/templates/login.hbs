@@ -1,5 +1,34 @@
 <!-- Nakon klika na "Prijavi se" poziva se funkcija
  "authenticate" iz kontrolera "controllers/login.js -->
+
+<div class="panel panel-primary">
+ <div class="panel-heading" id="signin">Prijavi se
+ </div>
+
+ <div class="panel-body">
+ 
+<form {{action 'authenticate' on='submit'}}>
+  <div class="form-group">
+    <label for="identification">Korisničko ime</label>
+    <br>
+    <input type="username" class="form-control" id="identification"  placeholder="Korisničko ime">
+  </div>
+  <div class="form-group">
+    <label for="password">Lozinka</label>
+    <input type="password" class="form-control" id="password"  placeholder="Lozinka">
+  </div>
+  <button type="submit" class="btn btn-default">Prijavi se</button>
+</form>
+
+
+ </div>
+</div>
+
+
+
+
+
+<!-- stari kod 
  
 <form {{action 'authenticate' on='submit'}}>
 	<label for="identification">Korisnicko ime</label>
@@ -11,7 +40,11 @@
 	{{input id="password" type='password' value=password}} 
 	<br> <br>
 	<button type="submit"> Prijavi se</button>
+	<br>
 </form>
+
+-->
 
 <p>{{validationError}}</p>
 <p>{{authenticationError}}</p>
+

@@ -1,36 +1,20 @@
-ul.navigation-tmp{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #003366;
-    top: 0;
-    width: 100%;
+/* Application css*/
+.navbar-header
+{
+    width: 15%;
 }
 
-ul.navigation-tmp li{
-    float: left;
-    display: block;
-    color: white;
+/*Login css*/
+.panel-primary
+{
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    width:50%;
+    padding-top: 2%;
+}
+#signin
+{
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
 
-
-ul.navigation-tmp  a{
-    text-decoration: none;
-    color: #ccc;
-}
-
-ul.navigation-tmp li:hover:not(.active) {
-    background-color: #808080;
-}
-
-.active {
-    background-color: transparent;
-}
-
-li.logout {
-    float: right;
 }

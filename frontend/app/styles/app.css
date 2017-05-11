@@ -8,3 +8,7 @@
 .panel-login {
     margin-top: 25%;
 }
+
+.btn btn-primary{
+	float: right;
+}

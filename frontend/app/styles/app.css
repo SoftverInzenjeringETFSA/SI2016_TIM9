@@ -16,3 +16,7 @@ body {
 .title-buttons-right {
     line-height: 69px;
 }
+    
+.btn btn-primary{
+	float: right;
+}

@@ -1,4 +1,4 @@
-#SI2016_TIM9 - Wise Solutions 1001
+# SI2016_TIM9 - Wise Solutions 1001
 
 Instalirati node.js (sa npm)
   - https://nodejs.org/en/
@@ -22,23 +22,23 @@ Instalirati MySQL 5.7.18
   - GRANT ALL PRIVILEGES ON tim9.* TO 'EtfSI2016'@'localhost';
 
 Kreirati tabele u bazi
-  - Tabele se automatski kreiraju ukoliko se iz poèetenog foldera izvrši naredba (koju je potrebno prilagoditi operativnom sistemu) 
+  - Tabele se automatski kreiraju ukoliko se iz poÄetenog foldera izvrÅ¡i naredba (koju je potrebno prilagoditi operativnom sistemu) 
 
 ```sh
  $ ./mvnw spring-boot:run 
 ``` 
 
-  - Tabele se mogu kreirati i ruèno tako što æe se importovati ukljuèeni dump.sql fajl
+  - Tabele se mogu kreirati i ruÄno tako Å¡to Ä‡e se importovati ukljuÄeni dump.sql fajl
 
 Kako pokrenuti Ember aplikaciju?
-  - Ember se pokreæe upotrebom ember-cli alata, i to izvršenjem naredbe: "cd frontend && ember serve"
-  - Ember aplikacija æe biti dostupna na http://localhost:4200/
+  - Ember se pokreÄ‡e upotrebom ember-cli alata, i to izvrÅ¡enjem naredbe: "cd frontend && ember serve"
+  - Ember aplikacija Ä‡e biti dostupna na http://localhost:4200/
 
 Kako pokrenuti Java backend?
-  - Iz poèetnog foldera izvršiti naredbu (prilagoditi operativnom sistemu) 
+  - Iz poÄetnog foldera izvrÅ¡iti naredbu (prilagoditi operativnom sistemu) 
 
 ```sh
  $ ./mvnw spring-boot:run 
 ``` 
-  - URL Java API-a æe pisati u izlazu komande
+  - URL Java API-a Ä‡e pisati u izlazu komande
 

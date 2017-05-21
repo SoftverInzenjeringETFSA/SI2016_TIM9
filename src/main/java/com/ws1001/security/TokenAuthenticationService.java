@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,56 +25,53 @@ import com.ws1001.models.User;
 
 class TokenAuthenticationService {
 
-  private static UserRepository userRepository;
+    private static UserRepository userRepository;
 
-  static final long EXPIRATIONTIME = 864_000_000; // 10 days
-  static final String SECRET = "ThisIsASecret";
-  static final String TOKEN_PREFIX = "Bearer";
-  static final String HEADER_STRING = "Authorization";
-  static final String HEADER_CORS = "Access-Control-Allow-Origin";
-  static final String RS_ORIGIN = "http://localhost:4200";
+    static final long EXPIRATIONTIME = 864_000_000; // 10 days
+    static final String SECRET = "ThisIsASecret";
+    static final String TOKEN_PREFIX = "Bearer";
+    static final String HEADER_STRING = "Authorization";
+    static final String HEADER_CORS = "Access-Control-Allow-Origin";
+    static final String RS_ORIGIN = "http://localhost:4200";
 
-  //ovdje cemo morati dodati uloge u odgovor da bi na klijentskoj strani znali privilegije
-  static void addAuthentication(HttpServletResponse res, String username) throws IOException{
-      String JWT = Jwts.builder()
-          .setSubject(username)
-          .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
-          .signWith(SignatureAlgorithm.HS512, SECRET)
-          .compact();
-      res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
-      res.addHeader(HEADER_CORS, RS_ORIGIN);
-      String str1 = "{ \"jwt\" : ";
-      String str2 = "\"" + JWT + "\" }";
-      res.getWriter().write(str1 + str2);
-  }
+    static void addAuthentication(HttpServletResponse res, String username, String role) throws IOException {
+        String JWT = Jwts.builder()
+                .claim("username", username)
+                .claim("role", role)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
 
-  static Authentication getAuthentication(HttpServletRequest request) {
-      
-      ServletContext servletContext = request.getServletContext();
-      WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-      userRepository = webApplicationContext.getBean(UserRepository.class);
+        res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
+        res.addHeader(HEADER_CORS, RS_ORIGIN);
 
-      String token = request.getHeader(HEADER_STRING);
-      if (token != null) {
-    
-        String userReq = Jwts.parser()
-            .setSigningKey(SECRET)
-            .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-            .getBody()
-            .getSubject();
+        res.getWriter().write("{ \"token\" : \"" + JWT + "\" }");
+    }
 
-      User user = userRepository.findByUsername(userReq);
+    static Authentication getAuthentication(HttpServletRequest request) {
+        ServletContext servletContext = request.getServletContext();
+        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        userRepository = webApplicationContext.getBean(UserRepository.class);
 
-      Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        String token = request.getHeader(HEADER_STRING);
+        if (token != null) {
+            String userReq = Jwts.parser()
+                    .setSigningKey(SECRET)
+                    .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                    .getBody()
+                    .get("username").toString();
 
-      if (user != null) {
-          grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
-      }     
+            User user = userRepository.findByUsername(userReq);
+            Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-      return userReq != null ?
-          new UsernamePasswordAuthenticationToken(userReq, null, grantedAuthorities) : //emptyList()
-          null;
-      }
-      return null;
-  }
+            if (user != null) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+            }
+
+            return userReq != null ?
+                    new UsernamePasswordAuthenticationToken(userReq, null, grantedAuthorities) :
+                    null;
+        }
+        return null;
+    }
 }

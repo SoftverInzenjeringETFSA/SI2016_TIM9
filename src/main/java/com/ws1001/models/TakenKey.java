@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table
-public class TakenKey extends Model {
+public class TakenKey extends BaseModel {
 	private Reservation reservation;
 	private Date takenAt;
 	private Date returnedAt;

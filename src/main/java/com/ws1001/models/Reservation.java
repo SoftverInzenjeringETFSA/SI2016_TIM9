@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table
-public class Reservation extends Model {
+public class Reservation extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 	private ScheduleBlock scheduleBlock;

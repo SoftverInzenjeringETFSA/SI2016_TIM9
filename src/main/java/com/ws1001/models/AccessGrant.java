@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class AccessGrant extends Model {
+public class AccessGrant extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 

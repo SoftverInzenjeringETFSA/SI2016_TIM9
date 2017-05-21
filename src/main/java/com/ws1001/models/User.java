@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table
-public class User extends Model {
+public class User extends BaseModel {
 	public enum UserType { Teacher, Operator, Admin };
 
 	private String firstName;
@@ -22,6 +22,18 @@ public class User extends Model {
 	private List<AccessGrant> accessGrants = new ArrayList<AccessGrant>();
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 	private List<DamageReport> damageReports = new ArrayList<DamageReport>();
+
+	public User() {
+
+	}
+
+	public User(String firstName, String lastName, String username, String password, UserType type) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.type = type;
+	}
 
 	@Column(nullable = false)
 	public String getFirstName() {
@@ -95,7 +107,6 @@ public class User extends Model {
 		this.damageReports = damageReports;
 	}
 
-	//zelimo da Hibernate ignorira ovu metodu
 	@Transient
 	public String getRole() {
 		String result = null;

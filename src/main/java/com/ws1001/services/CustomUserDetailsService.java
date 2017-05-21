@@ -27,19 +27,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         com.ws1001.models.User user = userRepository.findByUsername(username);
-        if(user == null) {
-            throw new UsernameNotFoundException("Username " + username +" not found");
+        if (user == null) {
+            throw new UsernameNotFoundException("Username " + username + " not found");
         }
 
-        logger.info(user.getUsername() + " " + user.getPassword() + " " +  getGrantedAuthorities(user)
-            + "/" + user.getRole());
+        logger.info(user.getUsername() + " " + user.getPassword() + " " + getGrantedAuthorities(user)
+                + "/" + user.getRole());
+
         return new User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user));
     }
 
     private Collection<GrantedAuthority> getGrantedAuthorities(com.ws1001.models.User user) {
 
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        if(user.getRole() != null) {
+        if (user.getRole() != null) {
             grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
         }
         return grantedAuthorities;

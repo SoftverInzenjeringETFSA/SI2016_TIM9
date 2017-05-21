@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table
-public class Semester extends Model {
+public class Semester extends BaseModel {
 	private Date beginsAt;
 	private Date endsAt;
 	private List<ScheduleBlock> scheduleBlocks = new ArrayList<ScheduleBlock>();

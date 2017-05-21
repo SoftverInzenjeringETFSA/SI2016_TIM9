@@ -12,7 +12,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table
-public class DamageReport extends Model {
+public class DamageReport extends BaseModel {
 	private Classroom classroom;
 	private User reportedBy;
 	private Reservation reservation;

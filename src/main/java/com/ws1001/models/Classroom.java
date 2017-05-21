@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Classroom extends Model {
+public class Classroom extends BaseModel {
 	public enum ClassroomType { Ordinary, Amphitheater, Laboratory, Office };
 	public enum StatusType { InUse, Nonfunctional, WorkInProgess };
 

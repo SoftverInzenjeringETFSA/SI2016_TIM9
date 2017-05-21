@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class EquipmentType extends Model {
+public class EquipmentType extends BaseModel {
 	private int label;
 	private String name;
 

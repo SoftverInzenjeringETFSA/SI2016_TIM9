@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class ScheduleBlock extends Model {
+public class ScheduleBlock extends BaseModel {
 	private Semester semester;
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 

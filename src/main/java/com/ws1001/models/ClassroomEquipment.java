@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class ClassroomEquipment extends Model {
+public class ClassroomEquipment extends BaseModel {
 	private Classroom classroom;
 	private EquipmentType equipmentType;
 	private int quantity;

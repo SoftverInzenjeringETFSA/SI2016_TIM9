@@ -8,10 +8,16 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('login');
-  this.route('users');
+  this.route('users', function() {});
   this.route('classrooms');
   this.route('reports');
   this.route('inventory');
+  this.route('base-route');
+  this.route('authenticated-route');
+  this.route('admin-route');
+  this.route('operator-route');
+  this.route('teacher-route');
+  this.route('logout');
 });
 
 export default Router;

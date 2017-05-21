@@ -1,32 +1,35 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	session: Ember.inject.service(),
-	validationError: "",
-	authenticationError: "",
-	actions: {
-		authenticate: function() {
-			var credentials = this.getProperties('identification', 'password'), authenticator = 'authenticator:custom';
-			
-			this.set('validationError','');
+    flashMessages: Ember.inject.service(),
 
-			if(!credentials.identification || !credentials.password){
-				this.set('validationError','Polja za unos ne smiju biti prazna');
-				return;
-			}
-			
-			if(!credentials.identification.match(/^[a-z0-9]+$/i)){
-				this.set('validationError','Korisnicko ime moze sadrzavari iskljucivo alfanumericke znakove.');
-				return;
-			}
+    authenticate: function(credentials) {
+        var authenticator = 'authenticator:jwt';
 
-			if(credentials.password.length<=6){
-				this.set('validationError','Lozinka mora biti duza od 6 znakova.');
-				return;
-			}
-			this.get('session').authenticate(authenticator, credentials).catch((reason)=>{
-				this.set('authenticationError', reason.error || reason);
-			});
-		}
-	}
+        return this.get('session').authenticate(authenticator, credentials);
+    },
+
+    actions: {
+        login: function(credentials, doRedirect) {
+            const flashMessages = Ember.get(this, 'flashMessages');
+            var self = this;
+            this.authenticate(credentials).then(function(value) {
+                if(doRedirect) {
+                    self.transitionToRoute('index');
+                }
+                flashMessages.success("Uspješno prijavljen!");
+            }.bind(doRedirect), function(reason) {
+                flashMessages.danger("Pogrešni podaci.");
+            });
+        },
+
+        loginNormal: function() {
+            var credentials = this.getProperties('identification', 'password');
+            this.send('login', credentials, true);
+        },
+
+        loginWithoutRedirect: function(credentials) {
+            this.send('login', credentials, false);
+        }
+    }
 });

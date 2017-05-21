@@ -37,8 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-    //CORS problemi - potrebno je dozvoliti da OPTIONS zahtjevi koje browser salje
-    //stignu do servera
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
@@ -46,9 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // za testiranje
-        auth.userDetailsService(customUserDetailsService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

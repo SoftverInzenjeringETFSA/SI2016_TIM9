@@ -37,6 +37,7 @@ class TokenAuthenticationService {
     static void addAuthentication(HttpServletResponse res, String username, String role) throws IOException {
         String JWT = Jwts.builder()
                 .claim("username", username)
+                .claim("email", username)
                 .claim("role", role)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)

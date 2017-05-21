@@ -1,5 +1,7 @@
 package com.ws1001.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +81,8 @@ public class User extends BaseModel {
 	public void setType(UserType type) {
 		this.type = type;
 	}
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	public List<AccessGrant> getAccessGrants() {
 		return accessGrants;
@@ -89,6 +92,7 @@ public class User extends BaseModel {
 		this.accessGrants = accessGrants;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	public List<Reservation> getReservations() {
 		return reservations;
@@ -98,6 +102,7 @@ public class User extends BaseModel {
 		this.reservations = reservations;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "reportedBy")
 	public List<DamageReport> getDamageReports() {
 		return damageReports;

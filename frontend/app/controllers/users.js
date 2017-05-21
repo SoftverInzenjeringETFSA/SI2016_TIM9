@@ -1,0 +1,87 @@
+import Ember from 'ember';
+import User from '../models/user';
+import {
+    validator,
+    buildValidations
+}
+from 'ember-cp-validations';
+
+var Validations = buildValidations({
+    "model.user.firstName": [
+        validator('presence', {
+            presence: true
+        }),
+        validator('length', {
+            min: 4,
+            max: 255
+        })
+    ],
+    "model.user.lastName": [
+        validator('presence', {
+            presence: true
+        }),
+        validator('length', {
+            min: 4,
+            max: 255
+        })
+    ],
+    "model.user.username": [
+        validator('presence', {
+            presence: true
+        }),
+        validator('length', {
+            min: 4,
+            max: 255
+        })
+    ],
+    "model.user.password": [
+        validator('presence', {
+            presence: true,
+        }),
+        validator('length', {
+            min: 8,
+            max: 255
+        }),
+    ]
+}, {
+    debounce: 500
+});
+
+export default Ember.Controller.extend(Validations, {
+    userService: Ember.inject.service(),
+    flashMessages: Ember.inject.service(),
+
+    showNewUser: false,
+
+    actions: {
+    	add() {
+    		const flashMessages = Ember.get(this, 'flashMessages');
+			this.get('userService').create(this.get('model.user')).then(function(newAccount) {
+				this.get('model.users').pushObject(User.create(newAccount)); 
+				this.set('model.user', User.create({username: "", password: "", firstName: "", lastName: "", type: 0}));
+                flashMessages.success("Korisnik dodan.");
+            	this.toggleProperty('showNewUser');
+			}.bind(this), function() {
+                flashMessages.danger("Greška pri dodavanju korisnika.");
+            	this.toggleProperty('showNewUser');
+			}.bind(this));
+    	},
+
+    	delete(user) {
+    		const flashMessages = Ember.get(this, 'flashMessages');
+			this.get('userService').delete(user.id).then(function() {
+				this.get('model.users').removeObject(user); 
+			}.bind(this), function(data) {
+                flashMessages.danger("Greška pri brisanju korisnika.");
+			}.bind(this));
+    	},
+
+        toggleNewUser() {
+            this.toggleProperty('showNewUser');
+        },
+
+        selectRole(role) {
+            this.set('model.user.type', role);
+        }
+    }
+});

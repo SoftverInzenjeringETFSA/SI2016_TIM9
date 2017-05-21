@@ -3,7 +3,7 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	session: Ember.inject.service(),
-	actions: {
+	/*actions: {
 		//poziva se za logout
 		invalidateSession: function(){
 			this.get('session').invalidate();
@@ -13,5 +13,5 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         // Treba dodati kondicionalno prikazivanje ovisno o prijavi korisnika
         // Kad nije prijavljen: this.render('login')
         this.render('layouts/logged-in');
-    }
+    }*/
 });

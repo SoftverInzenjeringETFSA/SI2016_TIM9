@@ -26,8 +26,6 @@ import java.util.logging.Logger;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-    static Logger logger = Logger.getLogger(JWTLoginFilter.class.getName());
-
     public JWTLoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
@@ -36,6 +34,9 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException, IOException, ServletException {
         Credentials creds = new ObjectMapper().readValue(req.getInputStream(), Credentials.class);
+        if(creds.getEmail() != null) {
+            creds.setUsername(creds.getEmail());
+        }
 
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -48,9 +49,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
-        logger.info("heyyyyyyyy");
-
-        SimpleGrantedAuthority role = (SimpleGrantedAuthority)auth.getAuthorities().iterator().next();
+        SimpleGrantedAuthority role = (SimpleGrantedAuthority) auth.getAuthorities().iterator().next();
         if(role != null) {
             TokenAuthenticationService.addAuthentication(res, auth.getName(), role.getAuthority());
         } else {

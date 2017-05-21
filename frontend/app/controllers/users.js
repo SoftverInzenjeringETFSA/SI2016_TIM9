@@ -52,29 +52,44 @@ export default Ember.Controller.extend(Validations, {
     flashMessages: Ember.inject.service(),
 
     showNewUser: false,
+    filterTerm: '',
+
+    filterByTerm: function() {
+    	var term = this.get('filterTerm');
+    	if(term.length >= 3) {
+	    	this.set('model.users', this.get('userService').filterByTerm(this.get('filterTerm')));
+	    } else if(term === "") {
+	    	this.set('model.users', this.get('userService').all());
+	    }
+    },
+
+    debounceFilter: function() {
+        Ember.run.debounce(this, this.filterByTerm, 400);
+    }.observes('filterTerm'),
+
 
     actions: {
-    	add() {
-    		const flashMessages = Ember.get(this, 'flashMessages');
-			this.get('userService').create(this.get('model.user')).then(function(newAccount) {
-				this.get('model.users').pushObject(User.create(newAccount)); 
-				this.set('model.user', User.create({username: "", password: "", firstName: "", lastName: "", type: 0}));
+        add() {
+            const flashMessages = Ember.get(this, 'flashMessages');
+            this.get('userService').create(this.get('model.user')).then(function(newAccount) {
+                this.get('model.users').pushObject(User.create(newAccount));
+                this.set('model.user', User.create({ username: "", password: "", firstName: "", lastName: "", type: 0 }));
                 flashMessages.success("Korisnik dodan.");
-            	this.toggleProperty('showNewUser');
-			}.bind(this), function() {
+                this.toggleProperty('showNewUser');
+            }.bind(this), function() {
                 flashMessages.danger("Greška pri dodavanju korisnika.");
-            	this.toggleProperty('showNewUser');
-			}.bind(this));
-    	},
+                this.toggleProperty('showNewUser');
+            }.bind(this));
+        },
 
-    	delete(user) {
-    		const flashMessages = Ember.get(this, 'flashMessages');
-			this.get('userService').delete(user.id).then(function() {
-				this.get('model.users').removeObject(user); 
-			}.bind(this), function(data) {
+        delete(user) {
+            const flashMessages = Ember.get(this, 'flashMessages');
+            this.get('userService').delete(user.id).then(function() {
+                this.get('model.users').removeObject(user);
+            }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju korisnika.");
-			}.bind(this));
-    	},
+            }.bind(this));
+        },
 
         toggleNewUser() {
             this.toggleProperty('showNewUser');

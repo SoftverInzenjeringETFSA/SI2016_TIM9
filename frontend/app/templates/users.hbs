@@ -9,9 +9,9 @@
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
         <div class="input-group">
-            <input type="text" class="form-control">
+            {{input value=filterTerm class="form-control" placeholder="Trazite ..."}}
             <div class="input-group-btn">
-                <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                <button class="btn btn-primary" disabled><span class="glyphicon glyphicon-search"></span></button>
             </div>
         </div>
     </div>
@@ -20,6 +20,8 @@
   {{flash-message flash=flash}}
 {{/each}}
 
+
+    
 <table class="table">
     <thead>
         <tr>
@@ -34,9 +36,9 @@
         {{#each model.users as |user i|}}
             <tr>
                 <td>{{ add i 1 }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.username }}</td>
+                <td>{{#highlight-terms filterTerm}} {{ user.firstName }} {{/highlight-terms}}</td>
+                <td>{{#highlight-terms filterTerm}} {{ user.lastName }} {{/highlight-terms}}</td>
+                <td>{{#highlight-terms filterTerm}} {{ user.username }} {{/highlight-terms}}</td>
                 <td>
                 <!--    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a> -->
                     <button {{action "delete" user}} class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
@@ -45,6 +47,9 @@
         {{/each}}
     </tbody>
 </table>
+
+<!--
+
 <div class="pull-right">
     <ul class="pagination">
         <li><a href="#">Prev</a></li>
@@ -55,6 +60,9 @@
         <li><a href="#">Next</a></li>
     </ul>
 </div>
+
+-->
+
 {{#if showNewUser}}
     {{#modal-dialog onClose="toggleNewUser" targetAttachment="center" translucentOverlay=true}}
         <h3><span class="glyphicon glyphicon-plus-sign"></span>  Dodaj novog korisnika</h3>
@@ -83,3 +91,5 @@
         </form>
     {{/modal-dialog}}
 {{/if}}
+
+

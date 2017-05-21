@@ -41,8 +41,8 @@ public class UserController extends BaseController<User, UserService> {
     }
 
     @ResponseBody
-    public ResponseEntity filterByUsername(@PathVariable("username") String username) {
-        return ResponseEntity.ok(service.getByPartOfUsername(username));
+    public ResponseEntity filter(@PathVariable("term") String term) {
+        return ResponseEntity.ok(service.filter(term));
     }
 
     @ResponseBody

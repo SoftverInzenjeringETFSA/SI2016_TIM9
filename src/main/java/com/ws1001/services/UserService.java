@@ -37,5 +37,9 @@ public class UserService extends BaseService<User, UserRepository> {
         return repository.findByUsernameContaining(partOfUsername);
     }
 
+    public List<User> filter(String term) {
+        return repository.filterByTerm(term);
+    }
+
 
 }

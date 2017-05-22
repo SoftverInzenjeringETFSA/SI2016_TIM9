@@ -32,7 +32,8 @@ var Validations = buildValidations({
         validator('length', {
             min: 4,
             max: 255
-        })
+        }),        
+        validator('unique-username')
     ],
     "model.user.password": [
         validator('presence', {

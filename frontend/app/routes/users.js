@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import AdminRoute from './admin-route';
+import AuthenticatedRoute from './authenticated-route';
 import User from '../models/user';
 
-export default AdminRoute.extend({
+export default AuthenticatedRoute.extend({
     userService: Ember.inject.service(),
 
 	model: function() {

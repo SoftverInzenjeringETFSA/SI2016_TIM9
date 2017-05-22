@@ -16,7 +16,6 @@ import javax.validation.Valid;
 public abstract class BaseController<M extends BaseModel, S extends BaseService<M, ? >> {
     protected S service;
 
-
     @Autowired
     public void setService(S service) {
         this.service = service;

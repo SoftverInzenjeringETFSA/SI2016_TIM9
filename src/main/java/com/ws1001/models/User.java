@@ -112,6 +112,7 @@ public class User extends BaseModel {
 		this.damageReports = damageReports;
 	}
 
+	@JsonIgnore
 	@Transient
 	public String getRole() {
 		String result = null;

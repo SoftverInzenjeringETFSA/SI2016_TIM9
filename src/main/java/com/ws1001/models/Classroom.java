@@ -19,13 +19,23 @@ public class Classroom extends BaseModel {
 	private User teacherInCharge;
 	private ClassroomType type;
 	private StatusType status;
-	private int seatCount;
-	private int keyCount;
-	private int takenKeyCount;
+	private Integer seatCount;
+	private Integer keyCount;
+	private Integer takenKeyCount;
 	private List<AccessGrant> accessGrants = new ArrayList<AccessGrant>();
 	private List<ClassroomEquipment> equipment = new ArrayList<ClassroomEquipment>();
 	private List<DamageReport> damageReports = new ArrayList<DamageReport>();
 	private List<Reservation> reservations = new ArrayList<Reservation>();
+
+	public Classroom() { }
+
+	public Classroom(String name, Integer seatCount, Integer keyCount, StatusType status, ClassroomType type) {
+		this.name = name;
+		this.seatCount = seatCount;
+		this.keyCount = keyCount;
+		this.status = status;
+		this.type = type;
+	}
 
 	@Column(unique = true, nullable = false)
 	public String getName() {
@@ -64,29 +74,29 @@ public class Classroom extends BaseModel {
 	}
 
 	@Column(nullable = false)
-	public int getSeatCount() {
+	public Integer getSeatCount() {
 		return seatCount;
 	}
 
-	public void setSeatCount(int seatCount) {
+	public void setSeatCount(Integer seatCount) {
 		this.seatCount = seatCount;
 	}
 
 	@Column(nullable = false)
-	public int getKeyCount() {
+	public Integer getKeyCount() {
 		return keyCount;
 	}
 
-	public void setKeyCount(int keyCount) {
+	public void setKeyCount(Integer keyCount) {
 		this.keyCount = keyCount;
 	}
 
 	@Column(nullable = false)
-	public int getTakenKeyCount() {
+	public Integer getTakenKeyCount() {
 		return takenKeyCount;
 	}
 
-	public void setTakenKeyCount(int takenKeyCount) {
+	public void setTakenKeyCount(Integer takenKeyCount) {
 		this.takenKeyCount = takenKeyCount;
 	}
 	

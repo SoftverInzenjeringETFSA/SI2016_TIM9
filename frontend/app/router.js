@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('operator-route');
   this.route('teacher-route');
   this.route('logout');
+  this.route('reservations');
 });
 
 export default Router;

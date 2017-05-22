@@ -3,8 +3,8 @@ import BaseService from './base-service';
 import User from '../models/user';
 
 export default BaseService.extend({
-	usernameExists: function(email) {
-    	return this.ajax({ url: `users/exists/${email}`, type: "GET" });
+	usernameExists: function(username) {
+    	return this.ajax({ url: `users/exists/${username}`, type: "GET" });
     },
 
     // admin    

@@ -1,8 +1,108 @@
+{{title "Sale"}}
+
 <div class="row">
     <div class="col-md-6">
         <h1>Sale</h1>
     </div>
     <div class="col-md-6 text-right title-buttons-right">
-        <a href="#" class="btn btn-primary">Dodaj novu salu</a>
+	    {{#if (eq currentUser.role "ROLE_ADMIN")}}
+	        <button {{action "toggleNewClassroom"}} class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Dodaj novu salu</button>
+        {{/if}}
     </div>
 </div>
+<!--
+<div class="row">
+    <div class="col-md-3 col-md-offset-9 text-right">
+        <div class="input-group">
+            {{input value=filterTerm class="form-control" placeholder="Trazite ..."}}
+            <div class="input-group-btn">
+                <button class="btn btn-primary" disabled><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+
+   
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naziv</th>
+            <th>Odgovorna osoba</th>
+            <th>Broj sjedišta</th>
+            <th>Broj ključeva</th>
+            <th>Broj uzetih ključeva</th>
+            <th>Tip i status sale</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each model.classrooms as |classroom i|}}
+            <tr>
+                <td>{{ add i 1 }}</td>
+                <td>{{#highlight-terms filterTerm}} {{ classroom.name }} {{/highlight-terms}}</td>
+                <td>{{#highlight-terms filterTerm}} {{ classroom.teacherInCharge.firstName }} {{ classroom.teacherInCharge.lastName }} {{/highlight-terms}}</td>
+                <td>{{ classroom.seatCount }}</td>
+                <td>{{ classroom.keyCount }}</td>
+                <td>{{ classroom.takenKeyCount }}</td>
+                <td>{{ classroom.type }} / {{ classroom.status }}</td>
+                <td>
+                <!--    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a> -->
+	                {{#if (eq currentUser.role "ROLE_ADMIN")}}
+	                    <button {{action "delete" classroom}} class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{#if showNewClassroom}}
+    {{#modal-dialog onClose="toggleNewClassroom" targetAttachment="center" translucentOverlay=true}}
+        <h3><span class="glyphicon glyphicon-plus-sign"></span> Dodaj novu salu</h3>
+            <br>
+        <form class="col-md-12">
+            <div class="form-group">
+                {{validated-input type="text" model=model placeholder="Naziv" valuePath="classroom.name"}}
+            </div>
+            <div class="form-group">
+                {{input type="number" class="form-control" min=1 max=9999 value=model.classroom.seatCount placeholder="Broj sjedišta"}}
+            </div>
+            <div class="form-group">
+                {{input type="number" class="form-control" min=1 max=9999 value=model.classroom.keyCount placeholder="Broj ključeva"}}
+            </div>            
+            <div class="form-group">
+                <select class="form-control" onchange= {{action "selectType" value="target.value"}}>
+                    <option value="0" selected= {{eq model.classroom.type 0}}>Obična</option>
+                    <option value="1" selected= {{eq model.classroom.type 1}}>Amfiteatar</option>
+                    <option value="2" selected= {{eq model.classroom.type 2}}>Laboratorija</option>
+                    <option value="3" selected= {{eq model.classroom.type 3}}>Kancelarija</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" onchange= {{action "selectStatus" value="target.value"}}>
+                    <option value="-1" selected= {{eq model.classroom.teacherId -1}}>Nema odgovorne osobe</option>
+
+					{{#each model.users as |user|}}
+						{{#if (eq user.type "Teacher")}}
+							<option value="user.id" selected= {{eq model.classroom.teacherId user.id}}> {{ user.firstName }} {{ user.lastName }} </option>
+						{{/if}}
+					{{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" onchange= {{action "selectTeacher" value="target.value"}}>
+                    <option value="0" selected= {{eq role 0}}>U upotrebi</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" disabled={{v-get this 'isInvalid'}} {{action "add"}}>Dodaj</button>
+        </form>
+    {{/modal-dialog}}
+{{/if}}
+
+

@@ -20,6 +20,9 @@
                                 {{#if (eq currentUser.role "ROLE_ADMIN")}}
                                   {{#nav-link-to 'inventory'}}<span class="glyphicon glyphicon-list"></span> Inventar{{/nav-link-to}}
                                 {{/if}}
+                                {{#if (eq currentUser.role "ROLE_OPERATOR")}}
+                                  {{#nav-link-to 'reservations'}}<span class="glyphicon glyphicon-list-alt"></span> Rezervacije{{/nav-link-to}}
+                                {{/if}}
 
 
                                 <!-- <li class="dropdown">

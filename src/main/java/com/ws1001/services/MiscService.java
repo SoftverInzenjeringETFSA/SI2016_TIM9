@@ -26,8 +26,8 @@ public class MiscService  {
     @Autowired
     public void setClassroomRepository(ClassroomRepository classroomRepository) { this.classroomRepository = classroomRepository; }
 
-    public void getGlobalStats() {
-        
+    public GlobalStats getGlobalStats() {
+        return new GlobalStats(userRepository.count(), classroomRepository.count());
     }
 
     public class GlobalStats {

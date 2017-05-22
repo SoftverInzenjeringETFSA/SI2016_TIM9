@@ -35,6 +35,7 @@ public class Classroom extends BaseModel {
 		this.keyCount = keyCount;
 		this.status = status;
 		this.type = type;
+		this.takenKeyCount = 0;
 	}
 
 	@Column(unique = true, nullable = false)

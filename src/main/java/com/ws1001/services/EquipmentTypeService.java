@@ -18,13 +18,15 @@ import java.util.List;
 public class EquipmentTypeService extends BaseService<EquipmentType, EquipmentTypeRepository> {
 
     public EquipmentType save(EquipmentType model) throws ServiceException {
+
+        //Name contains just letters and numbers
         ExpressionParser parser = new SpelExpressionParser();
         boolean value = parser.parseExpression("'" + model.getName() + "' matches '^[a-zA-Z0-9]*$'").getValue(Boolean.class);
 
         if(model.getId() == null && getByLabel(model.getLabel()) != null)
-            throw new ServiceException("An equipment type with this label already exists!");
+            throw new ServiceException("Equipment type with this label already exist!");
         else if(!value)
-            throw new ServiceException("An equipment type name does not have proper name!");
+            throw new ServiceException("Equipment type name does not have proper name!");
 
         try {
             return super.save(model);

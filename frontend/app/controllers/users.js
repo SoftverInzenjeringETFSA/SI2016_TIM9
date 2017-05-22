@@ -32,7 +32,7 @@ var Validations = buildValidations({
         validator('length', {
             min: 4,
             max: 255
-        }),        
+        }),
         validator('unique-username')
     ],
     "model.user.password": [
@@ -56,12 +56,12 @@ export default Ember.Controller.extend(Validations, {
     filterTerm: '',
 
     filterByTerm: function() {
-    	var term = this.get('filterTerm');
-    	if(term.length >= 3) {
-	    	this.set('model.users', this.get('userService').filterByTerm(this.get('filterTerm')));
-	    } else if(term === "") {
-	    	this.set('model.users', this.get('userService').all());
-	    }
+        var term = this.get('filterTerm');
+        if (term.length >= 3) {
+            this.set('model.users', this.get('userService').filterByTerm(this.get('filterTerm')));
+        } else if (term === "") {
+            this.set('model.users', this.get('userService').all());
+        }
     },
 
     debounceFilter: function() {

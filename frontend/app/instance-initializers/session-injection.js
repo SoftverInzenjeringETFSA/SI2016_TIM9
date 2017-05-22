@@ -9,7 +9,7 @@ export default {
         appInstance.inject('controller', 'session', 'service:session');
         appInstance.inject('component', 'session', 'service:session');
         appInstance.inject('service:current-user', 'session', 'service:session');
-        
+
         appInstance.inject('component', 'currentUser', 'service:current-user');
         appInstance.inject('controller', 'currentUser', 'service:current-user');
         appInstance.inject('route', 'currentUser', 'service:current-user');

@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
             const flashMessages = Ember.get(this, 'flashMessages');
             var self = this;
             this.authenticate(credentials).then(function(value) {
-                if(doRedirect) {
+                if (doRedirect) {
                     self.transitionToRoute('index');
                 }
                 flashMessages.success("Uspješno prijavljen!");

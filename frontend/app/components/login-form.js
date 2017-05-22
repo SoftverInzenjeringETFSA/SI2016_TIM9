@@ -24,13 +24,13 @@ var Validations = buildValidations({
 });
 
 export default Ember.Component.extend(Validations, {
-	init: function() {
+    init: function() {
         this._super();
-		this.empty();
+        this.empty();
     },
 
     empty: function() {
-    	this.set('identification', '');
-    	this.set('password', '');
+        this.set('identification', '');
+        this.set('password', '');
     }
 });

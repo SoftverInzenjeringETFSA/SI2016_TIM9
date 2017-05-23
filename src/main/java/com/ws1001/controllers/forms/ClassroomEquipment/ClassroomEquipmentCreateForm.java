@@ -2,6 +2,7 @@ package com.ws1001.controllers.forms.ClassroomEquipment;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Dario on 5/22/2017.
@@ -14,7 +15,11 @@ public class ClassroomEquipmentCreateForm {
 
     @NotNull
     @Min(1)
-    private Long equipmentType;
+    private int equipmentTypeLabel;
+
+    @NotNull
+    @Size(min = 1, max = 255)
+    private String equipmentTypeName;
 
     @NotNull
     @Min(1)
@@ -28,12 +33,20 @@ public class ClassroomEquipmentCreateForm {
         this.classroom = classroom;
     }
 
-    public Long getEquipmentType() {
-        return equipmentType;
+    public int getEquipmentTypeLabel() {
+        return equipmentTypeLabel;
     }
 
-    public void setEquipmentType( Long equipmentType ) {
-        this.equipmentType = equipmentType;
+    public void setEquipmentTypeLabel( int equipmentTypeLabel ) {
+        this.equipmentTypeLabel = equipmentTypeLabel;
+    }
+
+    public String getEquipmentTypeName() {
+        return equipmentTypeName;
+    }
+
+    public void setEquipmentTypeName( String equipmentTypeName ) {
+        this.equipmentTypeName = equipmentTypeName;
     }
 
     public int getQuantity() {
@@ -43,8 +56,4 @@ public class ClassroomEquipmentCreateForm {
     public void setQuantity( int quantity ) {
         this.quantity = quantity;
     }
-
-
-
-
 }

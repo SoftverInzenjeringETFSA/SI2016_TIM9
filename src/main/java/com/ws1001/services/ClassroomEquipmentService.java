@@ -17,6 +17,8 @@ public class ClassroomEquipmentService extends BaseService<ClassroomEquipment, C
             throw new ServiceException("Classroom does not exist!");
         else if (model.getEquipmentType() == null)
             throw new ServiceException("Equipment type does not exist!");
+        if(repository.countByNameAndLabel(model.getEquipmentType().getName(), model.getEquipmentType().getLabel(), model.getClassroom().getId()) > 0)
+            throw new ServiceException("Equipment already exists in classroom!");
 
         try {
             return super.save(model);

@@ -38,7 +38,7 @@ public class ClassroomEquipmentController extends BaseController<ClassroomEquipm
     @ResponseBody
     public ResponseEntity create( @RequestBody @Valid ClassroomEquipmentCreateForm newClassroomEquipment) {
         try{
-            EquipmentType equipmentType = equipmentTypeService.get(newClassroomEquipment.getEquipmentType());
+            EquipmentType equipmentType = equipmentTypeService.getFirstByLabelAndName(newClassroomEquipment.getEquipmentTypeLabel(), newClassroomEquipment.getEquipmentTypeName());
             Classroom classroom = classroomService.get(newClassroomEquipment.getClassroom());
 
             ClassroomEquipment classroomEquipment = new ClassroomEquipment(classroom, equipmentType, newClassroomEquipment.getQuantity());

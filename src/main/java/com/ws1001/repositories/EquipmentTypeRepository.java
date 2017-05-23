@@ -15,4 +15,6 @@ public interface EquipmentTypeRepository extends PagingAndSortingRepository<Equi
 
     @Query("select et from EquipmentType et where et.name like  %:name%")
     List<EquipmentType> searchAllByName(@Param("name") String name );
+
+    EquipmentType getFirstByLabelAndName(@Param("label") int Label, @Param("name") String Name);
 }

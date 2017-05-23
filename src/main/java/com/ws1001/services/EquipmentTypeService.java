@@ -38,4 +38,10 @@ public class EquipmentTypeService extends BaseService<EquipmentType, EquipmentTy
     public EquipmentType getByLabel( int label ) { return repository.getByLabel(label); }
 
     public List<EquipmentType> searchByName( String name ) { return repository.searchAllByName(name); }
+
+    public EquipmentType getFirstByLabelAndName( int equipmentTypeLabel, String equipmentTypeName) throws ServiceException {
+        EquipmentType equipmentType = repository.getFirstByLabelAndName(equipmentTypeLabel, equipmentTypeName);
+        if(equipmentType == null) throw new ServiceException("Equipment type does not exist!");
+        return  equipmentType;
+    }
 }

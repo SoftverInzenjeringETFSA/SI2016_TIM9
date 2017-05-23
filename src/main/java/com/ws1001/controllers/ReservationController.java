@@ -11,22 +11,24 @@ import com.ws1001.services.UserService;
 import com.ws1001.services.exceptions.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 public class ReservationController extends BaseController<Reservation, ReservationService> {
     @ResponseBody
+    @PreAuthorize("HAS_ROLE('ROLE_OPERATOR')")
     public ResponseEntity create(@RequestBody @Valid ReservationCreateForm newReservation) {
         try {
             Classroom classroom = new ClassroomService().getByName(newReservation.getClassroomName());
             User user = new UserService().getByUsername(newReservation.getTeacherUsername());
             ScheduleBlock scheduleBlock = null; // Until we can figure out what it does
-            Date reservedAt = new Date(); // Gets current day
+            LocalDateTime reservedAt = newReservation.getReservedAt(); // Gets current day
             byte duration = newReservation.getDuration();
 
             Reservation reservation = new Reservation(classroom, user, scheduleBlock, reservedAt, duration);
@@ -39,6 +41,7 @@ public class ReservationController extends BaseController<Reservation, Reservati
     }
 
     @ResponseBody
+    @PreAuthorize("HAS_ROLE('ROLE_OPERATOR')")
     public ResponseEntity delete(@PathVariable("id") Long id) {
         return super.delete(id);
     }

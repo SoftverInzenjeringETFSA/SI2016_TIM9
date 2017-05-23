@@ -6,7 +6,7 @@ import com.ws1001.models.ScheduleBlock;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ReservationCreateForm {
     @Size(min = 2, max = 255) @NotNull
@@ -16,6 +16,16 @@ public class ReservationCreateForm {
     private String teacherUsername;
 
     private ScheduleBlock scheduleBlock;
+
+    private LocalDateTime reservedAt;
+
+    public LocalDateTime getReservedAt() {
+        return reservedAt;
+    }
+
+    public void setReservedAt(LocalDateTime reservedAt) {
+        this.reservedAt = reservedAt;
+    }
 
     @Min(1) @NotNull
     private byte duration;

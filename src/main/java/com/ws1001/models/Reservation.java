@@ -1,6 +1,6 @@
 package com.ws1001.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +15,11 @@ public class Reservation extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 	private ScheduleBlock scheduleBlock;
-	private Date reservedAt;
+	private LocalDateTime reservedAt;
 	private byte duration;
 
-	public Reservation(Classroom classroom, User teacher, ScheduleBlock scheduleBlock, Date reservedAt, byte duration) {
+	public Reservation(Classroom classroom, User teacher, ScheduleBlock scheduleBlock,
+					   LocalDateTime reservedAt, byte duration) {
 		this.classroom = classroom;
 		this.teacher = teacher;
 		this.scheduleBlock = scheduleBlock;
@@ -55,11 +56,11 @@ public class Reservation extends BaseModel {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-	public Date getReservedAt() {
+	public LocalDateTime getReservedAt() {
 		return reservedAt;
 	}
 
-	public void setReservedAt(Date reservedAt) {
+	public void setReservedAt(LocalDateTime reservedAt) {
 		this.reservedAt = reservedAt;
 	}
 

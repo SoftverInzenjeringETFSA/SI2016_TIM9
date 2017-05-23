@@ -1,5 +1,9 @@
 package com.ws1001.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +20,22 @@ public class TakenKey extends BaseModel {
 	private Date takenAt;
 	private Date returnedAt;
 
+	public TakenKey(){
+
+	}
+	public TakenKey(Reservation reservation, Date takenAt, Date returnedAt){
+		this.reservation = reservation;
+		this.takenAt = takenAt;
+		this.returnedAt = returnedAt;
+	}
+
+	public void returnKey(Date returnedAt){
+		this.returnedAt = returnedAt;
+	}
+
 	@OneToOne(optional = false)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public Reservation getReservation() {
 		return reservation;
 	}

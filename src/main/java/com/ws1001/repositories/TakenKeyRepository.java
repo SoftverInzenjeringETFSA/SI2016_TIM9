@@ -12,5 +12,5 @@ import java.util.List;
  * Created by ramic on 22.05.2017..
  */
 public interface TakenKeyRepository extends PagingAndSortingRepository<TakenKey, Long> {
-
+    TakenKey findById(int Id);
 }

@@ -8,11 +8,11 @@ import java.util.List;
 
 public class ReservationService extends BaseService<Reservation, ReservationRepository> {
     public List<Reservation> findByUsername(String username) {
-        return repository.findByUsername(username);
+        return repository.findByTeacher(new UserService().getByUsername(username));
     }
 
     public List<Reservation> findByClassroom(String name) {
-        return repository.findByClassroom(name);
+        return repository.findByClassroom(new ClassroomService().getByName(name));
     }
 
     public Reservation save(Reservation reservation) throws ServiceException {

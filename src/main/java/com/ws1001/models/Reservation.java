@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table
@@ -54,7 +52,6 @@ public class Reservation extends BaseModel {
 		this.scheduleBlock = scheduleBlock;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	public LocalDateTime getReservedAt() {
 		return reservedAt;

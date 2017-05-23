@@ -49,7 +49,6 @@ public class AccessGrantController extends BaseController<AccessGrant, AccessGra
             AccessGrant accessGrant = new AccessGrant();
             accessGrant.setClassroom(classroom);
             accessGrant.setTeacher(teacher);
-            accessGrant.setId(null);
 
             accessGrant = service.save(accessGrant);
             return ResponseEntity.ok(accessGrant);
@@ -58,5 +57,6 @@ public class AccessGrantController extends BaseController<AccessGrant, AccessGra
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 
 }

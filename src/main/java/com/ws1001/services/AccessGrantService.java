@@ -20,6 +20,8 @@ public class AccessGrantService extends BaseService<AccessGrant, AccessGrantRepo
     public AccessGrant save(AccessGrant model) throws ServiceException {
         if(model.getId() == null && getByClassroomIdAndTeacherId(model.getClassroom().getId(), model.getTeacher().getId()) != null)
           throw new ServiceException("An access grant with these parameters already exists!");
+        else if(model.getTeacher().getRole()!= "ROLE_TEACHER")
+            throw new ServiceException("Added user is not a teacher!");
         else
         if(model.getId() != null) {
             // TO-DO: Finish proper partial update logic (shouldn't send the whole object during update)

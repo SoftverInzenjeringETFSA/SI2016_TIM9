@@ -18,6 +18,14 @@ public class Reservation extends BaseModel {
 	private Date reservedAt;
 	private byte duration;
 
+	public Reservation(Classroom classroom, User teacher, ScheduleBlock scheduleBlock, Date reservedAt, byte duration) {
+		this.classroom = classroom;
+		this.teacher = teacher;
+		this.scheduleBlock = scheduleBlock;
+		this.reservedAt = reservedAt;
+		this.duration = duration;
+	}
+
 	@ManyToOne(optional = false)
 	public Classroom getClassroom() {
 		return classroom;

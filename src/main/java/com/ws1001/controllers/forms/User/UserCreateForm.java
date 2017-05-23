@@ -1,8 +1,5 @@
 package com.ws1001.controllers.forms.User;
 
-import com.ws1001.models.User;
-import org.hibernate.validator.constraints.Email;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

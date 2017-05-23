@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 
 public class ReservationController extends BaseController<Reservation, ReservationService> {
     @ResponseBody
-    @PreAuthorize("HAS_ROLE('ROLE_OPERATOR')")
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     public ResponseEntity create(@RequestBody @Valid ReservationCreateForm newReservation) {
         try {
             Classroom classroom = new ClassroomService().getByName(newReservation.getClassroomName());
@@ -41,7 +41,7 @@ public class ReservationController extends BaseController<Reservation, Reservati
     }
 
     @ResponseBody
-    @PreAuthorize("HAS_ROLE('ROLE_OPERATOR')")
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     public ResponseEntity delete(@PathVariable("id") Long id) {
         return super.delete(id);
     }

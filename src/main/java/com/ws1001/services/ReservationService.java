@@ -16,21 +16,33 @@ public class ReservationService extends BaseService<Reservation, ReservationRepo
     }
 
     public Reservation save(Reservation reservation) throws ServiceException {
-        if (reservationValid(reservation)) {
-            return super.save(reservation);
-        } else {
-            throw new ServiceException("Reservation not available!");
+        if (!reservationValid(reservation)) {
+            throw new ServiceException("Invalid reservation time!");
         }
+
+        Reservation conflict = findReservationConflict(reservation);
+
+        if (conflict != null) {
+            throw new ServiceException(String.format("User %s reserved that classroom at %d:00",
+                    (conflict.getTeacher().getFirstName() + " " + conflict.getTeacher().getLastName()),
+                    conflict.getReservedAt().getHour()));
+        }
+
+        if (!(teacherHasRightsToClassroom(reservation))) {
+            throw new ServiceException("Teacher is not allowed to use classroom!!");
+        }
+
+        return super.save(reservation);
     }
 
     private boolean reservationValid(Reservation reservation) {
         int hour = reservation.getReservedAt().getHour();
         int duration = reservation.getDuration();
 
-        return hour >= 7 && hour + duration <= 22 && reservationAvailable(reservation);
+        return hour >= 7 && hour + duration <= 22;
     }
 
-    private boolean reservationAvailable(Reservation reservation) {
+    private Reservation findReservationConflict(Reservation reservation) {
         int startHour = reservation.getReservedAt().getHour();
         byte duration = reservation.getDuration();
 
@@ -43,11 +55,16 @@ public class ReservationService extends BaseService<Reservation, ReservationRepo
                 int crDuration = classroomReservation.getDuration();
 
                 if (!(startHour + duration < crStartHour || crStartHour + crDuration < startHour)) {
-                    return false;
+                    return classroomReservation;
                 }
             }
         }
 
-        return true;
+        return null;
+    }
+
+    private boolean teacherHasRightsToClassroom(Reservation reservation) {
+        // return new ClassroomService().availableTo(reservation.getClassroom(), reservation.getUser());
+        return true; // TODO: Fix when (and if) method is implemented
     }
 }

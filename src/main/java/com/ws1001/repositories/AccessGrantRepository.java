@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface AccessGrantRepository extends PagingAndSortingRepository<AccessGrant, Long> {
     AccessGrant findByClassroomIdAndTeacherId(Long classroomId, Long teacherId);
+    List <AccessGrant> findAllByClassroomId(Long classroomId);
+    List <AccessGrant> findAllByTeacherId(Long teacherId);
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +57,16 @@ public class AccessGrantController extends BaseController<AccessGrant, AccessGra
         } catch(ServiceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @ResponseBody
+    public ResponseEntity getAllByClassroomId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.getAllByClassroomId(id));
+    }
+
+    @ResponseBody
+    public ResponseEntity getAllByTeacherId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.getAllByTeacherId(id));
     }
 
 

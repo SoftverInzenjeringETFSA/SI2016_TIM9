@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by amina on 22.05.2017..
  */
@@ -38,7 +40,13 @@ public class AccessGrantService extends BaseService<AccessGrant, AccessGrantRepo
         return repository.findByClassroomIdAndTeacherId(classroomId, teacherId);
     }
 
+    public List<AccessGrant> getAllByClassroomId(Long classroomId){
+        return repository.findAllByClassroomId(classroomId);
+    }
 
+    public List<AccessGrant> getAllByTeacherId(Long teacherId){
+        return repository.findAllByTeacherId(teacherId);
+    }
 
 
 }

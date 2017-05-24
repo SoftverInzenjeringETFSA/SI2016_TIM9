@@ -23,13 +23,13 @@ public class ReservationService extends BaseService<Reservation, ReservationRepo
         Reservation conflict = findReservationConflict(reservation);
 
         if (conflict != null) {
-            throw new ServiceException(String.format("User %s reserved that classroom at %d:00",
+            throw new ServiceException(String.format("User %s reserved that classroom for %d:00",
                     (conflict.getTeacher().getFirstName() + " " + conflict.getTeacher().getLastName()),
                     conflict.getReservedAt().getHour()));
         }
 
         if (!(teacherHasRightsToClassroom(reservation))) {
-            throw new ServiceException("Teacher is not allowed to use classroom!!");
+            throw new ServiceException("Teacher not allowed to use classroom!");
         }
 
         return super.save(reservation);

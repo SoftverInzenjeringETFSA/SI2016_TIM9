@@ -34,7 +34,6 @@ public class TakenKey extends BaseModel {
 	}
 
 	@OneToOne(optional = false)
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@JsonIdentityReference(alwaysAsId = true)
 	public Reservation getReservation() {
 		return reservation;

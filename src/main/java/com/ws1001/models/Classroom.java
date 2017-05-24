@@ -154,4 +154,13 @@ public class Classroom extends BaseModel {
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
+
+	public void takenKeyPlusPlus()
+	{
+		takenKeyCount++;
+	}
+	public void takenKeyMinusMinus()
+	{
+		takenKeyCount--;
+	}
 }

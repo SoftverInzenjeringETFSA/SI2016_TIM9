@@ -20,6 +20,7 @@ Router.map(function() {
   this.route('teacher-route');
   this.route('logout');
   this.route('reservations');
+  this.route('takenKeys');
   this.route('reservation');
   this.route('equipment_type');
 });

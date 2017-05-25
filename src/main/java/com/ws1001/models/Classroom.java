@@ -1,5 +1,9 @@
 package com.ws1001.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class Classroom extends BaseModel {
 		this.keyCount = keyCount;
 		this.status = status;
 		this.type = type;
+		this.takenKeyCount = 0;
 	}
 
 	@Column(unique = true, nullable = false)
@@ -47,6 +52,8 @@ public class Classroom extends BaseModel {
 	}
 
 	@ManyToOne(optional = true)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public User getTeacherInCharge() {
 		return teacherInCharge;
 	}
@@ -56,6 +63,8 @@ public class Classroom extends BaseModel {
 	}
 
 	@Column(nullable = false)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public ClassroomType getType() {
 		return type;
 	}
@@ -65,6 +74,8 @@ public class Classroom extends BaseModel {
 	}
 
 	@Column(nullable = false)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public StatusType getStatus() {
 		return status;
 	}
@@ -101,6 +112,8 @@ public class Classroom extends BaseModel {
 	}
 	
 	@OneToMany(mappedBy = "classroom")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public List<AccessGrant> getAccessGrants() {
 		return accessGrants;
 	}
@@ -110,6 +123,8 @@ public class Classroom extends BaseModel {
 	}
 	
 	@OneToMany(mappedBy = "classroom")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public List<ClassroomEquipment> getEquipment() {
 		return equipment;
 	}
@@ -119,6 +134,8 @@ public class Classroom extends BaseModel {
 	}
 
 	@OneToMany(mappedBy = "classroom")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public List<DamageReport> getDamageReports() {
 		return damageReports;
 	}
@@ -128,11 +145,22 @@ public class Classroom extends BaseModel {
 	}
 
 	@OneToMany(mappedBy = "classroom")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
 
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
+	}
+
+	public void takenKeyPlusPlus()
+	{
+		takenKeyCount++;
+	}
+	public void takenKeyMinusMinus()
+	{
+		takenKeyCount--;
 	}
 }

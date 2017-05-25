@@ -45,6 +45,7 @@ public class ClassroomController extends BaseController<Classroom, ClassroomServ
                     newClassroom.getKeyCount(),
                     Classroom.StatusType.values()[newClassroom.getStatus()],
                     Classroom.ClassroomType.values()[newClassroom.getType()]);
+
             classroom.setTeacherInCharge(teacherInCharge);
             classroom = service.save(classroom);
 

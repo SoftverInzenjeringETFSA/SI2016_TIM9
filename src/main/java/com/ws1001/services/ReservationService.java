@@ -2,10 +2,11 @@ package com.ws1001.services;
 
 import com.ws1001.models.Reservation;
 import com.ws1001.repositories.ReservationRepository;
+import org.springframework.stereotype.Service;
 import com.ws1001.services.exceptions.ServiceException;
-
 import java.util.List;
 
+@Service
 public class ReservationService extends BaseService<Reservation, ReservationRepository> {
     public List<Reservation> findByUsername(String username) {
         return repository.findByTeacher(new UserService().getByUsername(username));

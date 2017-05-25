@@ -10,6 +10,15 @@ public class EquipmentType extends BaseModel {
 	private int label;
 	private String name;
 
+	public EquipmentType(){
+
+	}
+
+	public EquipmentType(int label, String name){
+		this.label = label;
+		this.name = name;
+	}
+
 	@Column(unique = true, nullable = false)
 	public int getLabel() {
 		return label;

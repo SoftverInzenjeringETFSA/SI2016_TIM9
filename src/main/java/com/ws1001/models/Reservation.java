@@ -1,13 +1,11 @@
 package com.ws1001.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table
@@ -15,8 +13,17 @@ public class Reservation extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 	private ScheduleBlock scheduleBlock;
-	private Date reservedAt;
+	private LocalDateTime reservedAt;
 	private byte duration;
+
+	public Reservation(Classroom classroom, User teacher, ScheduleBlock scheduleBlock,
+					   LocalDateTime reservedAt, byte duration) {
+		this.classroom = classroom;
+		this.teacher = teacher;
+		this.scheduleBlock = scheduleBlock;
+		this.reservedAt = reservedAt;
+		this.duration = duration;
+	}
 
 	@ManyToOne(optional = false)
 	public Classroom getClassroom() {
@@ -45,13 +52,12 @@ public class Reservation extends BaseModel {
 		this.scheduleBlock = scheduleBlock;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-	public Date getReservedAt() {
+	public LocalDateTime getReservedAt() {
 		return reservedAt;
 	}
 
-	public void setReservedAt(Date reservedAt) {
+	public void setReservedAt(LocalDateTime reservedAt) {
 		this.reservedAt = reservedAt;
 	}
 

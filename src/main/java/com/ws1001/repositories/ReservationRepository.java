@@ -1,10 +1,14 @@
 package com.ws1001.repositories;
 
-import com.ws1001.models.Reservation;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
-/**
- * Created by ramic on 23.05.2017..
- */
-public interface ReservationRepository  extends PagingAndSortingRepository<Reservation, Long> {
+import com.ws1001.models.Classroom;
+import com.ws1001.models.User;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import com.ws1001.models.Reservation;
+
+import java.util.List;
+
+public interface ReservationRepository extends PagingAndSortingRepository<Reservation, Long> {
+    List<Reservation> findByTeacher(User user);
+    List<Reservation> findByClassroom(Classroom classroom);
 }

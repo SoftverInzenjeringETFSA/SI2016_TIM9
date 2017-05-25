@@ -1,5 +1,9 @@
 package com.ws1001.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -10,6 +14,8 @@ public class AccessGrant extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
 	public Classroom getClassroom() {
 		return classroom;
@@ -18,7 +24,9 @@ public class AccessGrant extends BaseModel {
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
-	
+
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
 	public User getTeacher() {
 		return teacher;

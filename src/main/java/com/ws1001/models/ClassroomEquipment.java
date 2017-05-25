@@ -1,5 +1,9 @@
 package com.ws1001.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -12,6 +16,18 @@ public class ClassroomEquipment extends BaseModel {
 	private EquipmentType equipmentType;
 	private int quantity;
 
+	public ClassroomEquipment(){
+
+	}
+
+	public ClassroomEquipment(Classroom classroom, EquipmentType equipmentType, int quantity){
+		this.classroom = classroom;
+		this.equipmentType = equipmentType;
+		this.quantity = quantity;
+	}
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
 	public Classroom getClassroom() {
 		return classroom;
@@ -20,7 +36,9 @@ public class ClassroomEquipment extends BaseModel {
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
-	
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
 	public EquipmentType getEquipmentType() {
 		return equipmentType;

@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('classrooms');
   this.route('reports');
   this.route('inventory');
+  this.route('inventories');
   this.route('base-route');
   this.route('authenticated-route');
   this.route('admin-route');
@@ -20,6 +21,7 @@ Router.map(function() {
   this.route('logout');
   this.route('reservations');
   this.route('reservation');
+  this.route('equipment_type');
 });
 
 export default Router;

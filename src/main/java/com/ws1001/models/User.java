@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @Table
 public class User extends BaseModel {
-	public enum UserType { Teacher, Operator, Admin };
+	public enum UserType { Teacher, Operator, Admin }
 
 	private String firstName;
 	private String lastName;

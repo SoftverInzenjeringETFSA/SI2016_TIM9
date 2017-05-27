@@ -10,9 +10,8 @@ Router.map(function() {
   this.route('login');
   this.route('users', function() {});
   this.route('classrooms');
+  this.route('inventory', {path: "/classrooms/:id/inventory"});
   this.route('reports');
-  this.route('inventory');
-  this.route('inventories');
   this.route('base-route');
   this.route('authenticated-route');
   this.route('admin-route');
@@ -22,7 +21,7 @@ Router.map(function() {
   this.route('reservations');
   this.route('takenKeys');
   this.route('reservation');
-  this.route('equipment_type');
+  this.route('equipment-types');
 });
 
 export default Router;

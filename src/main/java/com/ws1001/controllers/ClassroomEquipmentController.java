@@ -38,13 +38,13 @@ public class ClassroomEquipmentController extends BaseController<ClassroomEquipm
     @ResponseBody
     public ResponseEntity create( @RequestBody @Valid ClassroomEquipmentCreateForm newClassroomEquipment) {
         try{
-            EquipmentType equipmentType = equipmentTypeService.getFirstByLabelAndName(newClassroomEquipment.getEquipmentTypeLabel(), newClassroomEquipment.getEquipmentTypeName());
-            Classroom classroom = classroomService.get(newClassroomEquipment.getClassroom());
+            Classroom classroom = classroomService.get(newClassroomEquipment.getClassroomId());
+            EquipmentType equipmentType = equipmentTypeService.get(newClassroomEquipment.getEquipmentTypeId());
+            if(classroom == null || equipmentType == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong classroom or equipment type ID.");
+            }
 
-            ClassroomEquipment classroomEquipment = new ClassroomEquipment(classroom, equipmentType, newClassroomEquipment.getQuantity());
-            classroomEquipment = service.save(classroomEquipment);
-
-            return ResponseEntity.ok(classroomEquipment);
+            return ResponseEntity.ok(service.save(new ClassroomEquipment(classroom, equipmentType, newClassroomEquipment.getQuantity())));
 
         } catch (ServiceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

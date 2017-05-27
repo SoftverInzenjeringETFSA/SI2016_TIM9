@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
  * Created by Dario on 5/22/2017.
  */
 public class EquipmentTypeCreateForm {
-    @Min(0)
+    @Min(1)
     @NotNull
     private int label;
 

@@ -10,50 +10,36 @@ import javax.validation.constraints.Size;
 public class ClassroomEquipmentCreateForm {
 
     @NotNull
-    @Min(1)
-    private Long classroom;
+    private Long classroomId;
 
     @NotNull
-    @Min(1)
-    private int equipmentTypeLabel;
-
-    @NotNull
-    @Size(min = 1, max = 255)
-    private String equipmentTypeName;
+    private Long equipmentTypeId;
 
     @NotNull
     @Min(1)
     private int quantity;
 
-    public Long getClassroom() {
-        return classroom;
+    public Long getClassroomId() {
+        return classroomId;
     }
 
-    public void setClassroom( Long classroom ) {
-        this.classroom = classroom;
+    public void setClassroomId(Long classroomId) {
+        this.classroomId = classroomId;
     }
 
-    public int getEquipmentTypeLabel() {
-        return equipmentTypeLabel;
+    public Long getEquipmentTypeId() {
+        return equipmentTypeId;
     }
 
-    public void setEquipmentTypeLabel( int equipmentTypeLabel ) {
-        this.equipmentTypeLabel = equipmentTypeLabel;
-    }
-
-    public String getEquipmentTypeName() {
-        return equipmentTypeName;
-    }
-
-    public void setEquipmentTypeName( String equipmentTypeName ) {
-        this.equipmentTypeName = equipmentTypeName;
+    public void setEquipmentTypeId(Long equipmentTypeId) {
+        this.equipmentTypeId = equipmentTypeId;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity( int quantity ) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

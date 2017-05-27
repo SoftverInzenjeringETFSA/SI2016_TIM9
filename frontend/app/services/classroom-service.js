@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import BaseService from './base-service';
-import Classroom from '../models/user';
+import Classroom from '../models/classroom';
 
 export default BaseService.extend({
 	nameExists: function(name) {
@@ -21,20 +21,20 @@ export default BaseService.extend({
     filterByTerm(term) {
         var classrooms = [];
         this.ajax({ url: `classrooms/filter/${term}`, type: "GET" }).then(function(data) {
-            data.forEach(function(user) {
-                users.addObject(Classroom.create(user));
+            data.forEach(function(classroom) {
+                users.addObject(Classroom.create(classroom));
             });
         });    
         return classrooms;
     },
 
     getById(id) {
-        var user = Classroom.create({});
+        var classroom = Classroom.create({});
         this.ajax({ url: `classrooms/${id}`, type: "GET"}).then(function(data) {
-            user.setProperties(data);
+            classroom.setProperties(data);
         });        
 
-        return user;
+        return classroom;
     },
 
     edit(userId, data) {

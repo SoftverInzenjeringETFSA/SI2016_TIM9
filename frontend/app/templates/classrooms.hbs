@@ -53,8 +53,9 @@
                 <td>{{ classroom.type }} / {{ classroom.status }}</td>
                 <td>
                 <!--    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a> -->
+                    {{#link-to "inventory" classroom.id class="btn btn-default" title="Oprema"}}<span class="glyphicon glyphicon-list"></span>{{/link-to}}
 	                {{#if (eq currentUser.role "ROLE_ADMIN")}}
-	                    <button {{action "delete" classroom}} class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
+	                    <button {{action "delete" classroom}} class="btn btn-default" title="Izbrisi salu"><span class="glyphicon glyphicon-remove-circle"></span></button>
                     {{/if}}
                 </td>
             </tr>

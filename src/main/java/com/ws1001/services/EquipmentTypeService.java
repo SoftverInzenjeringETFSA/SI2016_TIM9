@@ -18,7 +18,6 @@ import java.util.List;
 public class EquipmentTypeService extends BaseService<EquipmentType, EquipmentTypeRepository> {
 
     public EquipmentType save(EquipmentType model) throws ServiceException {
-
         //Name contains just letters and numbers
         ExpressionParser parser = new SpelExpressionParser();
         boolean value = parser.parseExpression("'" + model.getName() + "' matches '^[a-zA-Z0-9]*$'").getValue(Boolean.class);

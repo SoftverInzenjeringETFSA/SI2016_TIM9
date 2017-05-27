@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -122,9 +123,7 @@ public class Classroom extends BaseModel {
 		this.accessGrants = accessGrants;
 	}
 	
-	@OneToMany(mappedBy = "classroom")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
+	@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<ClassroomEquipment> getEquipment() {
 		return equipment;
 	}

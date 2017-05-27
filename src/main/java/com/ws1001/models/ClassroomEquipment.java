@@ -37,8 +37,6 @@ public class ClassroomEquipment extends BaseModel {
 		this.classroom = classroom;
 	}
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
 	public EquipmentType getEquipmentType() {
 		return equipmentType;

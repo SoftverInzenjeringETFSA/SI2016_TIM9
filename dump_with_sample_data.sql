@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `access_grant` (
   `id` bigint(20) NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `teacher_id` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -66,7 +66,7 @@ INSERT INTO `classroom` (`id`, `key_count`, `name`, `seat_count`, `status`, `tak
 CREATE TABLE `classroom_equipment` (
   `id` bigint(20) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `equipment_type_id` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -80,7 +80,7 @@ CREATE TABLE `damage_report` (
   `id` bigint(20) NOT NULL,
   `description` varchar(2048) COLLATE utf8_unicode_ci NOT NULL,
   `reported_at` datetime NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `reported_by_id` bigint(20) DEFAULT NULL,
   `reservation_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -107,7 +107,7 @@ CREATE TABLE `reservation` (
   `id` bigint(20) NOT NULL,
   `duration` tinyint(4) NOT NULL,
   `reserved_at` datetime NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `schedule_block_id` bigint(20) DEFAULT NULL,
   `teacher_id` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -185,7 +185,7 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `password`, `type`, `userna
 --
 ALTER TABLE `access_grant`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKmgidkukyqlvwaseb2xtiwhmeu` (`classroom_id`),
+  ADD KEY `FKmgidkukyqlvwaseb2xtiwhmeu` (`classroomId`),
   ADD KEY `FKpqjg9wpritg2ydrpllif44ufd` (`teacher_id`);
 
 --
@@ -201,7 +201,7 @@ ALTER TABLE `classroom`
 --
 ALTER TABLE `classroom_equipment`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKk4v0m59tbgafxdnkcmrsxtoqf` (`classroom_id`),
+  ADD KEY `FKk4v0m59tbgafxdnkcmrsxtoqf` (`classroomId`),
   ADD KEY `FKrkygposl49eg9w8wtl6kb290d` (`equipment_type_id`);
 
 --
@@ -209,7 +209,7 @@ ALTER TABLE `classroom_equipment`
 --
 ALTER TABLE `damage_report`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKnogmcu5capeih7t4r2ppr1yo1` (`classroom_id`),
+  ADD KEY `FKnogmcu5capeih7t4r2ppr1yo1` (`classroomId`),
   ADD KEY `FKt9hdb54qpxdbrhidw82qixwio` (`reported_by_id`),
   ADD KEY `FKq1dqtcqw7ylu1sv84mqcxa0dh` (`reservation_id`);
 
@@ -225,7 +225,7 @@ ALTER TABLE `equipment_type`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKjnxxi52alyljlcodaf614y0v3` (`classroom_id`),
+  ADD KEY `FKjnxxi52alyljlcodaf614y0v3` (`classroomId`),
   ADD KEY `FKp5xi97dr7s24uvs43qv8q2tdv` (`schedule_block_id`),
   ADD KEY `FKou38qwmwenwft1tafje4iuxsb` (`teacher_id`);
 

@@ -19,12 +19,12 @@ USE `tim9`;
 -- Dumping structure for table tim9.access_grant
 CREATE TABLE IF NOT EXISTS `access_grant` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `teacher_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKmgidkukyqlvwaseb2xtiwhmeu` (`classroom_id`),
+  KEY `FKmgidkukyqlvwaseb2xtiwhmeu` (`classroomId`),
   KEY `FKpqjg9wpritg2ydrpllif44ufd` (`teacher_id`),
-  CONSTRAINT `FKmgidkukyqlvwaseb2xtiwhmeu` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`),
+  CONSTRAINT `FKmgidkukyqlvwaseb2xtiwhmeu` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`id`),
   CONSTRAINT `FKpqjg9wpritg2ydrpllif44ufd` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
 
@@ -50,12 +50,12 @@ CREATE TABLE IF NOT EXISTS `classroom` (
 CREATE TABLE IF NOT EXISTS `classroom_equipment` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `quantity` int(11) NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `equipment_type_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKk4v0m59tbgafxdnkcmrsxtoqf` (`classroom_id`),
+  KEY `FKk4v0m59tbgafxdnkcmrsxtoqf` (`classroomId`),
   KEY `FKrkygposl49eg9w8wtl6kb290d` (`equipment_type_id`),
-  CONSTRAINT `FKk4v0m59tbgafxdnkcmrsxtoqf` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`),
+  CONSTRAINT `FKk4v0m59tbgafxdnkcmrsxtoqf` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`id`),
   CONSTRAINT `FKrkygposl49eg9w8wtl6kb290d` FOREIGN KEY (`equipment_type_id`) REFERENCES `equipment_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
 
@@ -65,14 +65,14 @@ CREATE TABLE IF NOT EXISTS `damage_report` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(2048) COLLATE utf8mb4_croatian_ci NOT NULL,
   `reported_at` datetime NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `reported_by_id` bigint(20) DEFAULT NULL,
   `reservation_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKnogmcu5capeih7t4r2ppr1yo1` (`classroom_id`),
+  KEY `FKnogmcu5capeih7t4r2ppr1yo1` (`classroomId`),
   KEY `FKt9hdb54qpxdbrhidw82qixwio` (`reported_by_id`),
   KEY `FKq1dqtcqw7ylu1sv84mqcxa0dh` (`reservation_id`),
-  CONSTRAINT `FKnogmcu5capeih7t4r2ppr1yo1` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`),
+  CONSTRAINT `FKnogmcu5capeih7t4r2ppr1yo1` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`id`),
   CONSTRAINT `FKq1dqtcqw7ylu1sv84mqcxa0dh` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`),
   CONSTRAINT `FKt9hdb54qpxdbrhidw82qixwio` FOREIGN KEY (`reported_by_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
@@ -93,14 +93,14 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `duration` tinyint(4) NOT NULL,
   `reserved_at` datetime NOT NULL,
-  `classroom_id` bigint(20) NOT NULL,
+  `classroomId` bigint(20) NOT NULL,
   `schedule_block_id` bigint(20) DEFAULT NULL,
   `teacher_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKjnxxi52alyljlcodaf614y0v3` (`classroom_id`),
+  KEY `FKjnxxi52alyljlcodaf614y0v3` (`classroomId`),
   KEY `FKp5xi97dr7s24uvs43qv8q2tdv` (`schedule_block_id`),
   KEY `FKou38qwmwenwft1tafje4iuxsb` (`teacher_id`),
-  CONSTRAINT `FKjnxxi52alyljlcodaf614y0v3` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`),
+  CONSTRAINT `FKjnxxi52alyljlcodaf614y0v3` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`id`),
   CONSTRAINT `FKou38qwmwenwft1tafje4iuxsb` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FKp5xi97dr7s24uvs43qv8q2tdv` FOREIGN KEY (`schedule_block_id`) REFERENCES `schedule_block` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;

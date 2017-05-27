@@ -14,6 +14,15 @@ public class AccessGrant extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 
+	public AccessGrant() {
+
+	}
+
+	public AccessGrant(Classroom classroom, User teacher) {
+		this.classroom = classroom;
+		this.teacher = teacher;
+	}
+
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
@@ -25,8 +34,6 @@ public class AccessGrant extends BaseModel {
 		this.classroom = classroom;
 	}
 
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(optional = false)
 	public User getTeacher() {
 		return teacher;

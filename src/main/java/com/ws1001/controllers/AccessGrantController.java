@@ -11,7 +11,6 @@ import com.ws1001.services.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,16 +42,14 @@ public class AccessGrantController extends BaseController<AccessGrant, AccessGra
     @ResponseBody
     public ResponseEntity create(@RequestBody @Valid AccessGrantCreateForm newAccessGrant) {
         try {
+            Classroom classroom = classroomService.get(newAccessGrant.getClassroomId());
+            User teacher = userService.get(newAccessGrant.getUserId());
 
-           Classroom classroom = classroomService.get(newAccessGrant.getClassroom_id());
-           User teacher = userService.get(newAccessGrant.getUser_id());
+            if(classroom == null || teacher == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong classroom or teacher ID.");
+            }
 
-            AccessGrant accessGrant = new AccessGrant();
-            accessGrant.setClassroom(classroom);
-            accessGrant.setTeacher(teacher);
-
-            accessGrant = service.save(accessGrant);
-            return ResponseEntity.ok(accessGrant);
+            return ResponseEntity.ok(service.save(new AccessGrant(classroom, teacher)));
 
         } catch(ServiceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('users', function() {});
   this.route('classrooms');
   this.route('inventory', {path: "/classrooms/:id/inventory"});
+  this.route('access-grants', {path: "/classrooms/:id/access-grants"});
   this.route('reports');
   this.route('base-route');
   this.route('authenticated-route');

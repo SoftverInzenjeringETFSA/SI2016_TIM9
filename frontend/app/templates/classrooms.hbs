@@ -54,6 +54,7 @@
                 <td>
                 <!--    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a> -->
                     {{#link-to "inventory" classroom.id class="btn btn-default" title="Oprema"}}<span class="glyphicon glyphicon-list"></span>{{/link-to}}
+                    {{#link-to "access-grants" classroom.id class="btn btn-default" title="Pristup"}}<span class="glyphicon glyphicon-lock"></span>{{/link-to}}
 	                {{#if (eq currentUser.role "ROLE_ADMIN")}}
 	                    <button {{action "delete" classroom}} class="btn btn-default" title="Izbrisi salu"><span class="glyphicon glyphicon-remove-circle"></span></button>
                     {{/if}}

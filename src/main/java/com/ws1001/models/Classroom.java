@@ -112,9 +112,7 @@ public class Classroom extends BaseModel {
 		this.takenKeyCount = takenKeyCount;
 	}
 	
-	@OneToMany(mappedBy = "classroom")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
+	@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<AccessGrant> getAccessGrants() {
 		return accessGrants;
 	}
@@ -132,7 +130,7 @@ public class Classroom extends BaseModel {
 		this.equipment = equipment;
 	}
 
-	@OneToMany(mappedBy = "classroom")
+	@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@JsonIdentityReference(alwaysAsId = true)
 	public List<DamageReport> getDamageReports() {
@@ -143,7 +141,7 @@ public class Classroom extends BaseModel {
 		this.damageReports = damageReports;
 	}
 
-	@OneToMany(mappedBy = "classroom")
+	@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@JsonIdentityReference(alwaysAsId = true)
 	public List<Reservation> getReservations() {

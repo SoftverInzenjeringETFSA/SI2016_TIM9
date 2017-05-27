@@ -65,6 +65,7 @@ public class User extends BaseModel {
 	}
 
 	@Column(nullable = false)
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

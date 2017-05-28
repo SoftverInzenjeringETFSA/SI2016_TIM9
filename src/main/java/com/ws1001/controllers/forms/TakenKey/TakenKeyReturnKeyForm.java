@@ -9,10 +9,6 @@ import java.util.Date;
 public class TakenKeyReturnKeyForm {
     @NotNull
     private Long reservationId;
-    @NotNull
-    private Date takenAt;
-    @NotNull
-    private Date returnedAt;
 
 
     public Long getReservationId() {
@@ -23,19 +19,4 @@ public class TakenKeyReturnKeyForm {
         this.reservationId = reservation;
     }
 
-    public Date getTakenAt() {
-        return takenAt;
-    }
-
-    public void setTakenAt(Date takenAt) {
-        this.takenAt = takenAt;
-    }
-
-    public Date getReturnedAt() {
-        return returnedAt;
-    }
-
-    public void setReturnedAt(Date returnedAt) {
-        this.returnedAt = returnedAt;
-    }
 }

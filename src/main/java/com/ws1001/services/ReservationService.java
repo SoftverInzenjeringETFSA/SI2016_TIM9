@@ -4,16 +4,19 @@ import com.ws1001.models.Reservation;
 import com.ws1001.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 import com.ws1001.services.exceptions.ServiceException;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ReservationService extends BaseService<Reservation, ReservationRepository> {
-    public List<Reservation> findByUsername(String username) {
-        return repository.findByTeacher(new UserService().getByUsername(username));
+    public List<Reservation> findByTeacher(Long teacherId) {
+        return repository.findAllByTeacherId(teacherId);
     }
 
-    public List<Reservation> findByClassroom(String name) {
-        return repository.findByClassroom(new ClassroomService().getByName(name));
+    public List<Reservation> findByClassroom(Long classroomId) {
+        return repository.findAllByClassroomId(classroomId);
     }
 
     public Reservation save(Reservation reservation) throws ServiceException {
@@ -26,7 +29,7 @@ public class ReservationService extends BaseService<Reservation, ReservationRepo
         if (conflict != null) {
             throw new ServiceException(String.format("User %s reserved that classroom for %d:00",
                     (conflict.getTeacher().getFirstName() + " " + conflict.getTeacher().getLastName()),
-                    conflict.getReservedAt().getHour()));
+                    conflict.getReservedAt().getHours()));
         }
 
         if (!(teacherHasRightsToClassroom(reservation))) {
@@ -36,26 +39,33 @@ public class ReservationService extends BaseService<Reservation, ReservationRepo
         return super.save(reservation);
     }
 
+    public List<Reservation> allToday() {
+        Date d1 = new Date(); d1.setHours(0); d1.setMinutes(0); d1.setSeconds(0);
+        Date d2 = new Date(); d2.setHours(23); d2.setMinutes(59); d2.setSeconds(0);
+
+        return repository.findAllByReservedAtBetween(d1, d2);
+    }
+
     private boolean reservationValid(Reservation reservation) {
-        int hour = reservation.getReservedAt().getHour();
+        int hour = reservation.getReservedAt().getHours();
         int duration = reservation.getDuration();
 
         return hour >= 7 && hour + duration <= 22;
     }
 
     private Reservation findReservationConflict(Reservation reservation) {
-        int startHour = reservation.getReservedAt().getHour();
+        int startHour = reservation.getReservedAt().getHours();
         byte duration = reservation.getDuration();
 
-        List<Reservation> classroomReservations = this.findByClassroom(reservation.getClassroom().getName());
+        List<Reservation> classroomReservations = this.findByClassroom(reservation.getClassroom().getId());
 
         for (Reservation classroomReservation : classroomReservations) {
-            if (classroomReservation.getReservedAt().getDayOfYear() == reservation.getReservedAt().getDayOfYear() &&
-                    classroomReservation.getReservedAt().getYear() == reservation.getReservedAt().getYear()) {
-                int crStartHour = classroomReservation.getReservedAt().getHour();
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+            if(fmt.format(reservation.getReservedAt()).equals(fmt.format(classroomReservation.getReservedAt()))) {
+                int crStartHour = classroomReservation.getReservedAt().getHours();
                 int crDuration = classroomReservation.getDuration();
 
-                if (!(startHour + duration < crStartHour || crStartHour + crDuration < startHour)) {
+                if (startHour + duration > crStartHour || startHour == crStartHour) {
                     return classroomReservation;
                 }
             }

@@ -19,6 +19,7 @@ var Validations = buildValidations({
 export default Ember.Controller.extend(Validations, {
     showNewAccess: false,
     accessService: Ember.inject.service(),
+    flashMessages: Ember.inject.service(),
 
 	actions: {
 		add() {

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 /**
  * Created by ramic on 22.05.2017..
@@ -40,62 +41,65 @@ public class TakenKeyController extends BaseController<TakenKey, TakenKeyService
         this.classroomService = classroomService;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity take(@RequestBody @Valid TakenKeyTakeForm newTakenKey) {
         try {
             Long reservationId = newTakenKey.getReservationId();
-            Reservation currentResrevation = null;
-            if (reservationId != null) {
-                currentResrevation = reservationService.get(reservationId);
-                if (currentResrevation == null) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not a reservation");
-                }
+            Reservation currentResrevation  = reservationService.get(reservationId);
+            if (currentResrevation == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not a reservation");
             }
+
             Long currentClassroomId = currentResrevation.getClassroom().getId();
             Classroom currentClassroom = classroomService.get(currentClassroomId);
-            currentClassroom.takenKeyPlusPlus();
+
+            if(currentClassroom.getTakenKeyCount() == currentClassroom.getKeyCount()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No more keys");
+            }
+
+            currentClassroom.takeKey();
             currentClassroom = classroomService.save(currentClassroom);
 
             TakenKey takenKey = new TakenKey(currentResrevation,
-                    newTakenKey.getTakenAt(),
-                    newTakenKey.getReturnedAt());
+                    new Date(),
+                    null);
 
-
-            takenKey = service.save(takenKey);
+            //takenKey = service.save(takenKey);
             return ResponseEntity.ok(takenKey);
         } catch (ServiceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity returnKey(@RequestBody @Valid TakenKeyReturnKeyForm returningKey) {
         try {
             Long reservationId = returningKey.getReservationId();
-            Reservation currentResrevation = null;
-            if (reservationId != null) {
-                currentResrevation = reservationService.get(reservationId);
-                if (currentResrevation == null) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not a reservation");
-                }
+            Reservation currentResrevation = reservationService.get(reservationId);
+            if (currentResrevation == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not a reservation");
             }
 
             Long currentClassroomId = currentResrevation.getClassroom().getId();
             Classroom currentClassroom = classroomService.get(currentClassroomId);
-            currentClassroom.takenKeyMinusMinus();
+
+            if(currentClassroom.getTakenKeyCount() == 0) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No keys to return");
+            }
+            currentClassroom.returnKey();
             currentClassroom = classroomService.save(currentClassroom);
 
-            TakenKey returnedKey = new TakenKey(currentResrevation, returningKey.getTakenAt(), returningKey.getTakenAt());
-            returnedKey = service.save(returnedKey);
+            TakenKey returnedKey = new TakenKey(currentResrevation,null, new Date());
+            //returnedKey = service.save(returnedKey);
             return ResponseEntity.ok(returnedKey);
         } catch (ServiceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity allTaken() throws ServiceException {
         return  ResponseEntity.ok(service.takenKeys());

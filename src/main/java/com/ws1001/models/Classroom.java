@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -152,12 +153,15 @@ public class Classroom extends BaseModel {
 		this.reservations = reservations;
 	}
 
-	public void takenKeyPlusPlus()
-	{
-		takenKeyCount++;
-	}
-	public void takenKeyMinusMinus()
+	@Transient
+	public void returnKey()
 	{
 		takenKeyCount--;
+	}
+
+	@Transient
+	public void takeKey()
+	{
+		takenKeyCount++;
 	}
 }

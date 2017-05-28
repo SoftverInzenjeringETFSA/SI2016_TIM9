@@ -26,6 +26,9 @@ public class ClassroomService extends BaseService<Classroom, ClassroomRepository
             throw new ServiceException("A classroom with this name already exists!");
         else if(model.getId() != null) {
             // TO-DO: Finish proper partial update logic (shouldn't send the whole object during update)
+            Classroom c = get(model.getId());
+            c.setTakenKeyCount(model.getTakenKeyCount());
+            return super.save(c);
         }
 
         try {

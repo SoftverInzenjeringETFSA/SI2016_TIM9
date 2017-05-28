@@ -18,24 +18,13 @@
                                   {{#nav-link-to 'users'}}<span class="glyphicon glyphicon-user"></span> Korisnici{{/nav-link-to}}
                                   {{#nav-link-to 'classrooms'}}<span class="glyphicon glyphicon-calendar"></span> Sale{{/nav-link-to}}
                                 {{#if (eq currentUser.role "ROLE_ADMIN")}}
-                                  {{#nav-link-to 'equipment-types'}}<span class="glyphicon glyphicon-list"></span> Oprema{{/nav-link-to}}                
-                                  {{#nav-link-to 'takenKeys'}}<span class="glyphicon glyphicon-lock"></span> Ključevi{{/nav-link-to}}
+                                  {{#nav-link-to 'equipment-types'}}<span class="glyphicon glyphicon-list"></span> Oprema{{/nav-link-to}}         
                                 {{/if}}
                                 {{#if (eq currentUser.role "ROLE_OPERATOR")}}
-                                  {{#nav-link-to 'reservations'}}<span class="glyphicon glyphicon-list-alt"></span> Rezervacije{{/nav-link-to}}
+                                  {{#nav-link-to 'all-reservations'}}<span class="glyphicon glyphicon-list-alt"></span> Rezervacije{{/nav-link-to}}       
+                                  {{#nav-link-to 'takenKeys'}}<span class="glyphicon glyphicon-lock"></span> Ključevi{{/nav-link-to}}
                                 {{/if}}
 
-
-                                <!-- <li class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-list-alt"></span> Izvještaji <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  {{#nav-link-to 'reports.busiest-classrooms'}} {{/nav-link-to}}            
-                  {{#nav-link-to ''}} {{/nav-link-to}}
-                  <li><a href="/reports/busiest-classrooms">Najopterećenije sale</a></li>
-                  <li><a href="/reports/damage-reports">Sale sa najviše kvarova</a></li>
-                </ul>
-              </li>    
-              -->
                             {{/if}}
                         </ul>
                         <ul class="nav navbar-nav navbar-right">

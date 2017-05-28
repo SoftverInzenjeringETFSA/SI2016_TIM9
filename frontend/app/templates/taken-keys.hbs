@@ -1,93 +1,36 @@
-{{title "Ključevi"}}
+{{title "Ključevi" }}
+
 <div class="row">
     <div class="col-md-6">
-        <h1>Ključevi</h1> </div>
+        <h1>Ključevi</h1>
+    </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <h3>Rezervisane sale</h3> </div>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Naziv sale</th>
-            <th>Rezervisao</th>
-            <th>Vrijeme</th>
-            <th>Izdaj ključ</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>S0-11</td>
-            <td>Otto</td>
-            <td>12:00 - 15:00</td>
-            <td>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>S0-11</td>
-            <td>Thornton</td>
-            <td>12:00 - 15:00</td>
-             <td>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>S0-11</td>
-            <td>the Bird</td>
-            <td>12:00 - 15:00</td>
-             <td>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<div class="row">
-    <div class="col-md-6">
-        <h3>Izdati ključevi</h3> </div>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Naziv sale</th>
-            <th>Ključ kod</th>
-            <th>Vrijeme</th>
-            <th>Vrati ključ</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>S0-11</td>
-            <td>Otto</td>
-            <td>12:00 - 15:00</td>
-            <td>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>S0-11</td>
-            <td>Thornton</td>
-            <td>12:00 - 15:00</td>
-             <td>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>S0-11</td>
-            <td>the Bird</td>
-            <td>12:00 - 15:00</td>
-             <td>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+            
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+
+{{full-calendar events=reservations viewName='agendaDay' eventClick=(action 'reservationClicked') }}
+
+{{#if (and showKeyActions (not-eq selectedReservation null)) }}
+    {{#modal-dialog onClose="toggleKeyActions" targetAttachment="center" translucentOverlay=true}}
+        <h3><span class="glyphicon glyphicon-lock"></span> Ključevi za salu {{ selectedReservation.classroom.name }}</h3>
+            <br>
+            <br>
+            <form class="col-md-12">
+
+            {{#if (lt selectedReservation.classroom.takenKeyCount selectedReservation.classroom.keyCount)}}
+            <button class="btn btn-primary" {{action "takeKey"}}><span class="glyphicon glyphicon-minus-sign"></span> Daj ključ</button>
+            {{/if}}
+
+            {{#if (gt selectedReservation.classroom.takenKeyCount 0) }}
+                <button class="btn btn-default" {{action "returnKey"}}><span class="glyphicon glyphicon-plus-sign"></span> Vrati ključ</button>
+            {{/if}}
+
+
+        </form>
+    {{/modal-dialog}}
+{{/if}}
+
+

@@ -11,10 +11,6 @@ import java.util.Date;
 public class TakenKeyTakeForm {
     @NotNull
     private Long reservationId;
-    @NotNull
-    private Date takenAt;
-    private Date returnedAt;
-
 
     public Long getReservationId() {
         return reservationId;
@@ -22,21 +18,5 @@ public class TakenKeyTakeForm {
 
     public void setReservationId(Long reservation) {
         this.reservationId = reservation;
-    }
-
-    public Date getTakenAt() {
-        return takenAt;
-    }
-
-    public void setTakenAt(Date takenAt) {
-        this.takenAt = takenAt;
-    }
-
-    public Date getReturnedAt() {
-        return returnedAt;
-    }
-
-    public void setReturnedAt(Date returnedAt) {
-        this.returnedAt = returnedAt;
     }
 }

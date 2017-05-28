@@ -25,6 +25,7 @@ var Validations = buildValidations({
 export default Ember.Controller.extend(Validations, {
     showNewEquipment: false,
     classroomEquipmentService: Ember.inject.service(),
+    flashMessages: Ember.inject.service(),
 
 	actions: {
 		add() {

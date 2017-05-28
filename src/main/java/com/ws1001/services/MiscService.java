@@ -1,22 +1,19 @@
 package com.ws1001.services;
 
-import com.ws1001.models.User;
+import com.ws1001.models.ClassroomEquipment;
+import com.ws1001.repositories.ClassroomEquipmentRepository;
 import com.ws1001.repositories.ClassroomRepository;
 import com.ws1001.repositories.UserRepository;
-import com.ws1001.services.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MiscService  {
-
-
     private UserRepository userRepository;
 
     private ClassroomRepository classroomRepository;
+
+    private ClassroomEquipmentRepository classroomEquipmentRepository;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -26,21 +23,26 @@ public class MiscService  {
     @Autowired
     public void setClassroomRepository(ClassroomRepository classroomRepository) { this.classroomRepository = classroomRepository; }
 
+    @Autowired
+    public void setClassroomEquipmentRepository(ClassroomEquipmentRepository classroomEquipmentRepository) { this.classroomEquipmentRepository = classroomEquipmentRepository; }
+
     public GlobalStats getGlobalStats() {
-        return new GlobalStats(userRepository.count(), classroomRepository.count());
+        return new GlobalStats(userRepository.count(), classroomRepository.count(), classroomEquipmentRepository.count());
     }
 
     public class GlobalStats {
         private Long userCount;
         private Long classroomCount;
+        private Long equipmentCount;
 
         public GlobalStats() {
 
         }
 
-        public GlobalStats(Long userCount, Long classroomCount) {
+        public GlobalStats(Long userCount, Long classroomCount, Long equipmentCount) {
             this.userCount = userCount;
             this.classroomCount = classroomCount;
+            this.equipmentCount = equipmentCount;
         }
 
         public Long getUserCount() {
@@ -57,6 +59,14 @@ public class MiscService  {
 
         public void setClassroomCount(Long classroomCount) {
             this.classroomCount = classroomCount;
+        }
+
+        public Long getEquipmentCount() {
+            return equipmentCount;
+        }
+
+        public void setEquipmentCount(Long equipmentCount) {
+            this.equipmentCount = equipmentCount;
         }
     }
 }

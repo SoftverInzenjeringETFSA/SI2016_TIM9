@@ -1,6 +1,9 @@
 package com.ws1001.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +16,15 @@ public class Reservation extends BaseModel {
 	private Classroom classroom;
 	private User teacher;
 	private ScheduleBlock scheduleBlock;
-	private LocalDateTime reservedAt;
+	private Date reservedAt;
 	private byte duration;
 
+	public Reservation() {
+
+	}
+
 	public Reservation(Classroom classroom, User teacher, ScheduleBlock scheduleBlock,
-					   LocalDateTime reservedAt, byte duration) {
+					   Date reservedAt, byte duration) {
 		this.classroom = classroom;
 		this.teacher = teacher;
 		this.scheduleBlock = scheduleBlock;
@@ -53,11 +60,12 @@ public class Reservation extends BaseModel {
 	}
 
 	@Column(nullable = false)
-	public LocalDateTime getReservedAt() {
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss", timezone="Europe/Sarajevo")
+	public Date getReservedAt() {
 		return reservedAt;
 	}
 
-	public void setReservedAt(LocalDateTime reservedAt) {
+	public void setReservedAt(Date reservedAt) {
 		this.reservedAt = reservedAt;
 	}
 

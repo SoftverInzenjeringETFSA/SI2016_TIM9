@@ -65,7 +65,7 @@ public class ReservationService extends BaseService<Reservation, ReservationRepo
                 int crStartHour = classroomReservation.getReservedAt().getHours();
                 int crDuration = classroomReservation.getDuration();
 
-                if (startHour + duration > crStartHour || startHour == crStartHour) {
+                if ( (startHour < crStartHour && startHour + duration > crStartHour) || startHour == crStartHour) {
                     return classroomReservation;
                 }
             }

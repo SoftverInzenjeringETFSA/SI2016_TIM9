@@ -1,11 +1,5 @@
-<form class="col-md-12" {{action (action authHandler) on='submit'}}>                                            
-  <div class="form-group">
-  	{{validated-input type="text" model=this placeholder="Username" valuePath="identification"}}
-  </div>
-                        
-  <div class="form-group">
-  	{{validated-input type="password" model=this placeholder="Password" valuePath="password"}}
-  </div>                        
-
-  <button type="submit" class="btn btn-primary">Login</button>
+<form class="col-md-12" {{action (action authHandler) on='submit' }}>
+    <div class="form-group"> {{validated-input type="text" model=this placeholder="Username" valuePath="identification"}} </div>
+    <div class="form-group"> {{validated-input type="password" model=this placeholder="Password" valuePath="password"}} </div>
+    <button type="submit" class="btn btn-primary center-block" disabled={{v-get this 'isInvalid'}}>Login</button>
 </form>

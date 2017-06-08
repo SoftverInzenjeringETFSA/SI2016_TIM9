@@ -38,14 +38,14 @@ public class ReservationController extends BaseController<Reservation, Reservati
         this.userService = userService;
     }
 
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
-    //@PreAuthorize("hasRole('ROLE_OPERATOR')")
     public ResponseEntity allToday() {
         return ResponseEntity.ok(service.allToday());
     }
 
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
-    //@PreAuthorize("hasRole('ROLE_OPERATOR')")
     public ResponseEntity create(@RequestBody @Valid ReservationCreateForm newReservation) {
         try {
             Classroom classroom = classroomService.get(newReservation.getClassroomId());
@@ -66,7 +66,7 @@ public class ReservationController extends BaseController<Reservation, Reservati
     }
 
     @ResponseBody
-    //@PreAuthorize("hasRole('ROLE_OPERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')")
     public ResponseEntity getByClassroomId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findByClassroom(id));
     }

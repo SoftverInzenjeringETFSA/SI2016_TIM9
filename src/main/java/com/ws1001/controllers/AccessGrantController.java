@@ -11,6 +11,7 @@ import com.ws1001.services.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +39,7 @@ public class AccessGrantController extends BaseController<AccessGrant, AccessGra
         this.userService = userService;
     }
 
-   // @PreAuthorize("hasRole('ROLE_OPERATOR')")
+    @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity create(@RequestBody @Valid AccessGrantCreateForm newAccessGrant) {
         try {

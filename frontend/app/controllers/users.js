@@ -84,12 +84,14 @@ export default Ember.Controller.extend(Validations, {
         },
 
         delete(user) {
+            if (window.confirm("Želite li izbrisati ovog korisnika?")) {
             const flashMessages = Ember.get(this, 'flashMessages');
             this.get('userService').delete(user.id).then(function() {
                 this.get('model.users').removeObject(user);
             }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju korisnika.");
             }.bind(this));
+            }
         },
 
         toggleNewUser() {
@@ -100,4 +102,6 @@ export default Ember.Controller.extend(Validations, {
             this.set('model.user.type', role);
         }
     }
+    
+    
 });

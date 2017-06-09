@@ -41,5 +41,4 @@ public class UserService extends BaseService<User, UserRepository> {
         return repository.filterByTerm(term);
     }
 
-
 }

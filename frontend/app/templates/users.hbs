@@ -37,7 +37,8 @@
             <th>Akcije</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>        
+       {{log currentUser.email}}
         {{#each model.users as |user i|}}
             <tr>
                 <td>{{ add i 1 }}</td>
@@ -46,9 +47,15 @@
                 <td>{{#highlight-terms filterTerm}} {{ user.username }} {{/highlight-terms}}</td>
                 <td>{{ user.type }}</td>
                 <td>
+               
                 <!--    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a> -->
                     {{#if (eq currentUser.role "ROLE_ADMIN")}}
+                        {{#if (not-eq currentUser.username user.username)}}
                         <button {{action "delete" user}} class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                        {{else}}
+                        <button class="btn btn-warning disabled"><span class="glyphicon glyphicon-user"></span></button>
+                        {{/if}}
+
                     {{/if}}
                 </td>
             </tr>

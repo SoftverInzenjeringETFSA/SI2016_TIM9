@@ -86,7 +86,6 @@
                 <select class="form-control" onchange= {{action "selectRole" value="target.value"}}>
                     <option value="0" selected= {{eq role 0}}>Profesor</option>
                     <option value="1" selected= {{eq role 1}}>Operator</option>
-                    <option value="2" selected= {{eq role 2}}>Admin</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" disabled={{v-get this 'isInvalid'}} {{action "add"}}>Dodaj</button>

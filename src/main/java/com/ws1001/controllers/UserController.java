@@ -21,6 +21,10 @@ public class UserController extends BaseController<User, UserService> {
     @ResponseBody
     public ResponseEntity create(@RequestBody @Valid UserCreateForm newUser) {
         try {
+            if(newUser.getType() == 2) {
+                throw new ServiceException("Ne moze se kreirati korisnik sa rolom admina.");
+            }
+            
             User user = new User(newUser.getFirstName(),
                     newUser.getLastName(),
                     newUser.getUsername(),

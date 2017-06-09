@@ -42,13 +42,15 @@ export default Ember.Controller.extend(Validations, {
         },
 
         delete(user) {
+            if (window.confirm("Želite li izbrisati ovu salu?")) {
             const flashMessages = Ember.get(this, 'flashMessages');
             this.get('classroomService').delete(user.id).then(function() {
                 this.get('model.classrooms').removeObject(user);
-                this.flashMessages("Uspješno obrisana sala.")
+                flashMessages.success("Uspješno obrisana sala.");
             }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju sale.");
             }.bind(this));
+        }
         },
 
         toggleNewClassroom() {

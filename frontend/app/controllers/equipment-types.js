@@ -42,12 +42,15 @@ export default Ember.Controller.extend(Validations, {
 		},
 
 		delete(equipment) {
+            if (window.confirm("Želite li izbrisati ovaj tip opreme?")) {
 			const flashMessages = Ember.get(this, 'flashMessages');
             this.get('equipmentTypeService').delete(equipment.id).then(function() {
                 this.get('model.types').removeObject(equipment);
+                flashMessages.success("Tip opreme izbrisan.");
             }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju tipa opreme.");
             }.bind(this));
+            }
 		},
 
 		toggleNewType() {

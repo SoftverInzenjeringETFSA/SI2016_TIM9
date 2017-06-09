@@ -88,6 +88,7 @@ export default Ember.Controller.extend(Validations, {
             const flashMessages = Ember.get(this, 'flashMessages');
             this.get('userService').delete(user.id).then(function() {
                 this.get('model.users').removeObject(user);
+                flashMessages.success("Korisnik izbrisan.");
             }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju korisnika.");
             }.bind(this));

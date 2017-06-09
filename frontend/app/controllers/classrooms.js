@@ -46,6 +46,7 @@ export default Ember.Controller.extend(Validations, {
             const flashMessages = Ember.get(this, 'flashMessages');
             this.get('classroomService').delete(user.id).then(function() {
                 this.get('model.classrooms').removeObject(user);
+                flashMessages.success("Sala izbrisana");
             }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju sale.");
             }.bind(this));

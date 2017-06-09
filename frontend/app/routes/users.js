@@ -3,8 +3,8 @@ import AuthenticatedRoute from './authenticated-route';
 import User from '../models/user';
 
 export default AuthenticatedRoute.extend({
-
   access: ['ROLE_OPERATOR', 'ROLE_ADMIN'],
+
   userService: Ember.inject.service(),
 
   beforeModel: function(transition) {

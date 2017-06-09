@@ -15,7 +15,9 @@
                     <div class="collapse navbar-collapse" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             {{#if session.isAuthenticated}}
+                                {{#if (not-eq currentUser.role "ROLE_TEACHER")}}
                                   {{#nav-link-to 'users'}}<span class="glyphicon glyphicon-user"></span> Korisnici{{/nav-link-to}}
+                                {{/if}}
                                   {{#nav-link-to 'classrooms'}}<span class="glyphicon glyphicon-calendar"></span> Sale{{/nav-link-to}}
                                 {{#if (eq currentUser.role "ROLE_ADMIN")}}
                                   {{#nav-link-to 'equipment-types'}}<span class="glyphicon glyphicon-list"></span> Oprema{{/nav-link-to}}         

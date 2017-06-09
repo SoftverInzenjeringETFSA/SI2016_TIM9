@@ -72,9 +72,8 @@ public class ClassroomController extends BaseController<Classroom, ClassroomServ
     }
 /*
     @ResponseBody
-    public ResponseEntity filter(@PathVariable("term") String term) {
+    p;ublic ResponseEntity filter(@PathVariable("term") String term) {
         return ResponseEntity.ok(service.filter(term));
     }
-
     */
 }

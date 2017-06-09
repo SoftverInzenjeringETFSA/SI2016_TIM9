@@ -5,6 +5,14 @@ import Classroom from '../models/classroom';
 export default AuthenticatedRoute.extend({
     classroomService: Ember.inject.service(),
     userService: Ember.inject.service(),
+    access: ['ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_TEACHER'],
+
+    beforeModel: function(transition) {
+      if (this.get('access').contains(this.get('currentUser.role'))) {
+        return true;
+      }
+      else this.transitionTo('index');
+    },
 
     model: function() {
         return Ember.RSVP.hash({

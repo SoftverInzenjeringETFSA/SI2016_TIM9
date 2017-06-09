@@ -31,14 +31,14 @@ export default Ember.Controller.extend(Validations, {
         add() {
             const flashMessages = Ember.get(this, 'flashMessages');
             this.get('classroomService').create(this.get('model.classroom')).then(function(newClassroom) {
-                this.get('model.classrooms').pushObject(Classroom.create(newClassroom));
-                this.set('model.classroom', Classroom.create({name: "", seatCount: 15, keyCount: 4, teacherId: null, status: 0, type: 0}));
-                flashMessages.success("Sala dodana.");
-                this.toggleProperty('showNewClassroom');
-            }.bind(this), function() {
-                flashMessages.danger("Greška pri dodavanju sale.");
-                this.toggleProperty('showNewClassroom');
-            }.bind(this));
+            this.get('model.classrooms').pushObject(Classroom.create(newClassroom));
+            this.set('model.classroom', Classroom.create({name: "", seatCount: 15, keyCount: 4, teacherId: null, status: 0, type: 0}));
+            this.toggleProperty('showNewClassroom');
+            this.flashMessages('Uspjesno kreirana prostorija!');
+          }.bind(this), function() {
+            flashMessages.danger("Greška pri dodavanju sale.");
+            this.toggleProperty('showNewClassroom');
+          }.bind(this));
         },
 
         delete(user) {
@@ -46,7 +46,7 @@ export default Ember.Controller.extend(Validations, {
             const flashMessages = Ember.get(this, 'flashMessages');
             this.get('classroomService').delete(user.id).then(function() {
                 this.get('model.classrooms').removeObject(user);
-                flashMessages.success("Sala izbrisana");
+                flashMessages.success("Uspješno obrisana sala.");
             }.bind(this), function(data) {
                 flashMessages.danger("Greška pri brisanju sale.");
             }.bind(this));

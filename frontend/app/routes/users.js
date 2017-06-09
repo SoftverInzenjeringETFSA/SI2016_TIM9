@@ -3,7 +3,16 @@ import AuthenticatedRoute from './authenticated-route';
 import User from '../models/user';
 
 export default AuthenticatedRoute.extend({
-    userService: Ember.inject.service(),
+
+  access: ['ROLE_OPERATOR', 'ROLE_ADMIN'],
+  userService: Ember.inject.service(),
+
+  beforeModel: function(transition) {
+    if (this.get('access').contains(this.get('currentUser.role'))) {
+      return true;
+    }
+    else this.transitionTo('index');
+  },
 
 	model: function() {
 		return Ember.RSVP.hash({

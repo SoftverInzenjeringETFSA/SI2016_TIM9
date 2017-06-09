@@ -3,8 +3,17 @@ import Reservation from '../models/reservation';
 
 export default Ember.Route.extend({
 	reservationService: Ember.inject.service(),
-    userService: Ember.inject.service(),
-    classroomService: Ember.inject.service(),
+  userService: Ember.inject.service(),
+  classroomService: Ember.inject.service(),
+
+	access: ['ROLE_OPERATOR'],
+
+	beforeModel: function(transition) {
+		if (this.get('access').contains(this.get('currentUser.role'))) {
+			return true;
+		}
+		else this.transitionTo('index');
+	},
 
 	model: function(params, transition) {
         return Ember.RSVP.hash({
@@ -20,7 +29,3 @@ export default Ember.Route.extend({
         controller.set('niceTime', '');
     }
 });
-
-
-
-

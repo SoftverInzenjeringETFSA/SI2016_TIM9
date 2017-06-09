@@ -65,37 +65,22 @@
     </tbody>
 </table>
 
-<!--
-
-<div class="pull-right">
-    <ul class="pagination">
-        <li><a href="#">Prev</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">Next</a></li>
-    </ul>
-</div>
-
--->
-
 {{#if showNewUser}}
     {{#modal-dialog onClose="toggleNewUser" targetAttachment="center" translucentOverlay=true}}
         <h3><span class="glyphicon glyphicon-plus-sign"></span>  Dodaj novog korisnika</h3>
             <br>
         <form class="col-md-12">
             <div class="form-group">
-                {{validated-input type="text" model=model placeholder="Ime" valuePath="user.firstName"}}
+                {{validated-input type="text" model=this placeholder="Ime" valuePath="model.user.firstName"}}
             </div>
             <div class="form-group">
-                {{validated-input type="text" model=model placeholder="Prezime" valuePath="user.lastName"}}
+                {{validated-input type="text" model=this placeholder="Prezime" valuePath="model.user.lastName"}}
             </div>
             <div class="form-group">
-                {{validated-input type="text" model=model placeholder="Username" valuePath="user.username"}}
+                {{validated-input type="text" model=this placeholder="Username" valuePath="model.user.username"}}
             </div>
             <div class="form-group">
-                {{validated-input type="password" model=model placeholder="Password" valuePath="user.password"}}
+                {{validated-input type="password" model=this placeholder="Password" valuePath="model.user.password"}}
             </div>
             <div class="form-group">
                 <select class="form-control" onchange= {{action "selectRole" value="target.value"}}>

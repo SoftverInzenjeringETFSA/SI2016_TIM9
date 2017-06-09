@@ -47,7 +47,7 @@
             <br>
         <form class="col-md-12">
         	<div class="form-group">
-                {{validated-input type="text" model=model placeholder="Naziv" valuePath="equipment.name"}}
+                {{validated-input type="text" model=this placeholder="Naziv" valuePath="model.equipment.name"}}
             </div>
             <div class="form-group">
                 {{input type="number" class="form-control" min=1 max=1000 value=model.equipment.label placeholder="Sifra (broj)"}}

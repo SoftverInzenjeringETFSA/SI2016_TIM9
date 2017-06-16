@@ -13,7 +13,7 @@ export default Ember.Service.extend({
             };
         }
         
-        params.url = `${config.apiHost}/${params.url}`;
+        params.url = `${config.apiHost}/api/${params.url}`;
         params.contentType = "application/json";
         return $.ajax(params);
     }

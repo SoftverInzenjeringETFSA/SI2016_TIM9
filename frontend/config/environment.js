@@ -28,7 +28,10 @@ module.exports = function(environment) {
         ENV.APP.rootElement = '#ember-testing';
     }
 
-    if (environment === 'production') {}
+    if (environment === 'production') {
+        ENV.host = 'http://localhost:8080';        
+        ENV.apiHost = "http://localhost:8080";
+    }
 
 
     ENV['ember-simple-auth'] = {

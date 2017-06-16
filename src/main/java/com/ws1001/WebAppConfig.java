@@ -12,8 +12,9 @@ import java.util.List;
 public class WebAppConfig extends RouterConfigurationSupport {
     @Override
     public List<String> listRouteFiles() {
+        String routeFile = "/" + WebAppConfig.class.getProtectionDomain().getCodeSource().getLocation().getPath()  + "routes.conf";;
         List<String> routeFiles = new ArrayList<String>();
-        routeFiles.add("classpath*:routes.conf");
+        routeFiles.add(routeFile);
         return routeFiles;
     }
 }

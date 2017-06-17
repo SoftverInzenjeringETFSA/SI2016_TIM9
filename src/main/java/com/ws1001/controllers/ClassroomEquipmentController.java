@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,6 +31,14 @@ public class ClassroomEquipmentController extends BaseController<ClassroomEquipm
     @Autowired
     public void setEquipmentTypeService (EquipmentTypeService equipmentTypeService) {this.equipmentTypeService = equipmentTypeService;}
 
+    @GetMapping(path = "/api/classroom-equipment/all")
+    @ResponseBody
+    @Override
+    public Iterable<ClassroomEquipment> all() {
+        return super.all();
+    }
+
+    @PostMapping(path = "/api/classroom-equipment")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity create( @RequestBody @Valid ClassroomEquipmentCreateForm newClassroomEquipment) {
@@ -51,7 +56,16 @@ public class ClassroomEquipmentController extends BaseController<ClassroomEquipm
         }
     }
 
+    @DeleteMapping(path = "/api/classroom-equipment/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity delete ( @PathVariable("id") Long id) {return super.delete(id);}
+
+    @GetMapping(path = "/api/classroom-equipment/page/{pageNumber}")
+    @ResponseBody
+    public ResponseEntity getPage(@PathVariable("pageNumber") int pageNumber)
+    {
+        return super.getPage(pageNumber);
+    }
+
 }

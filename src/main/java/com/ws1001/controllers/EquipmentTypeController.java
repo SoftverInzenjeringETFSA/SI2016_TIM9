@@ -7,10 +7,7 @@ import com.ws1001.services.exceptions.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,6 +18,12 @@ import java.util.List;
 @RestController
 public class EquipmentTypeController extends BaseController<EquipmentType, EquipmentTypeService> {
 
+    @GetMapping(path = "/api/equipment-types/all")
+    @ResponseBody
+    @Override
+    public Iterable<EquipmentType> all() {return super.all();}
+
+    @PostMapping(path = "/api/equipment-types")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity create( @RequestBody @Valid EquipmentTypeCreateForm newEquipmentType){
@@ -33,13 +36,24 @@ public class EquipmentTypeController extends BaseController<EquipmentType, Equip
         }
     }
 
+    @DeleteMapping(path = "/api/equipment-types/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity delete ( @PathVariable("id") Long id ) { return super.delete(id); }
 
+    @GetMapping(path = "/api/equipment-types/search-by/{name}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public List<EquipmentType> searchByName( @PathVariable("name") String name){
         return (List<EquipmentType>) service.searchByName(name);
     }
+
+    @GetMapping(path = "/api/equipment-types/page/{pageNumber}")
+    @ResponseBody
+    public ResponseEntity getPage(@PathVariable("pageNumber") int pageNumber) {return super.getPage(pageNumber);}
+
+    @GetMapping(path = "/api/equipment-types/{id}")
+    @ResponseBody
+    @Override
+    public ResponseEntity get(@PathVariable("id") Long id) {return super.get(id);}
 }

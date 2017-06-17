@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -38,12 +35,19 @@ public class ReservationController extends BaseController<Reservation, Reservati
         this.userService = userService;
     }
 
+    @GetMapping(path = "/api/reservations/all")
+    @ResponseBody
+    @Override
+    public Iterable<Reservation> all() {return super.all();}
+
+    @GetMapping(path = "/api/reservations/today ")
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity allToday() {
         return ResponseEntity.ok(service.allToday());
     }
 
+    @PostMapping(path = "/api/reservations")
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity create(@RequestBody @Valid ReservationCreateForm newReservation) {
@@ -65,12 +69,14 @@ public class ReservationController extends BaseController<Reservation, Reservati
         }
     }
 
+    @GetMapping(path = "/api/reservations/classroom/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')")
     public ResponseEntity getByClassroomId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findByClassroom(id));
     }
 
+    @DeleteMapping(path = "/api/reservations/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     public ResponseEntity delete(@PathVariable("id") Long id) {

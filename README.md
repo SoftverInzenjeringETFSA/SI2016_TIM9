@@ -1,5 +1,8 @@
-# SI2016_TIM9 - Wise Solutions 1001
+﻿# SI2016_TIM9 - Wise Solutions 1001
 
+##### Deploy aplikacije je na sljedećem linku: https://broad-territory.surge.sh/
+
+### Uputstvo za postavljanje projekta
 Instalirati node.js (sa npm)
   - https://nodejs.org/en/
 

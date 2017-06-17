@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -41,6 +39,15 @@ public class TakenKeyController extends BaseController<TakenKey, TakenKeyService
         this.classroomService = classroomService;
     }
 
+    @GetMapping(path = "/api/taken-keys/all")
+    @ResponseBody
+    @Override
+    public Iterable<TakenKey> all() {
+        return super.all();
+    }
+
+
+    @PostMapping(path = "/api/taken-keys/take")
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity take(@RequestBody @Valid TakenKeyTakeForm newTakenKey) {
@@ -72,6 +79,7 @@ public class TakenKeyController extends BaseController<TakenKey, TakenKeyService
         }
     }
 
+    @PostMapping(path = "/api/taken-keys/return")
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity returnKey(@RequestBody @Valid TakenKeyReturnKeyForm returningKey) {
@@ -99,6 +107,7 @@ public class TakenKeyController extends BaseController<TakenKey, TakenKeyService
         }
     }
 
+    @GetMapping(path = "/api/taken-keys/allTaken")
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity allTaken() throws ServiceException {

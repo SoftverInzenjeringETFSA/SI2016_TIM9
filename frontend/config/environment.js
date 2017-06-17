@@ -29,8 +29,8 @@ module.exports = function(environment) {
     }
 
     if (environment === 'production') {
-        ENV.host = 'http://localhost:8080';        
-        ENV.apiHost = "http://localhost:8080";
+        ENV.host = 'https://radiant-oasis-76187.herokuapp.com';        
+        ENV.apiHost = "https://radiant-oasis-76187.herokuapp.com/";
     }
 
 

@@ -26,6 +26,8 @@ public class UserController extends BaseController<User, UserService> {
         return super.all();
     }
 
+
+
     @PostMapping(path = "/api/users")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody

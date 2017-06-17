@@ -2,6 +2,7 @@ package com.ws1001.controllers;
 
 import com.ws1001.controllers.forms.Classroom.ClassroomCreateForm;
 import com.ws1001.controllers.forms.Classroom.ClassroomExistsForm;
+import com.ws1001.models.AccessGrant;
 import com.ws1001.models.Classroom;
 import com.ws1001.models.User;
 import com.ws1001.services.ClassroomService;
@@ -11,14 +12,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @RestController
 public class ClassroomController extends BaseController<Classroom, ClassroomService> {
+
+    @GetMapping(path = "/api/classrooms/all")
+    @ResponseBody
+    @Override
+    public Iterable<Classroom> all() {
+        return super.all();
+    }
+
+    @GetMapping(path = "/api/classrooms/{id}")
+    @ResponseBody
+    @Override
+    public ResponseEntity get(@PathVariable("id") Long id) {
+        return super.get(id);
+    }
+
+    @GetMapping(path = "/api/classrooms/page/{pageNumber}")
+    @ResponseBody
+    public ResponseEntity getPage(@PathVariable("pageNumber") Long id) {
+        return super.get(id);
+    }
 
     protected UserService userService;
 
@@ -26,7 +45,7 @@ public class ClassroomController extends BaseController<Classroom, ClassroomServ
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-
+    @PostMapping(path = "/api/classrooms")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity create(@RequestBody @Valid ClassroomCreateForm newClassroom) {
@@ -55,12 +74,14 @@ public class ClassroomController extends BaseController<Classroom, ClassroomServ
         }
     }
 
+    @DeleteMapping(path = "/api/classrooms/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity delete(@PathVariable("id") Long id) {
         return super.delete(id);
     }
 
+    @PostMapping(path = "/api/classrooms/exists")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public ResponseEntity exists(@RequestBody @Valid ClassroomExistsForm cef) {

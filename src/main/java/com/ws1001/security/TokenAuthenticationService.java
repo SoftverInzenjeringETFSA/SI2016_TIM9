@@ -32,7 +32,7 @@ class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
     static final String HEADER_CORS = "Access-Control-Allow-Origin";
-    static final String RS_ORIGIN = "http://localhost:4200";
+    static final String RS_ORIGIN = "*";
 
     static void addAuthentication(HttpServletResponse res, String username, String role) throws IOException {
         String JWT = Jwts.builder()

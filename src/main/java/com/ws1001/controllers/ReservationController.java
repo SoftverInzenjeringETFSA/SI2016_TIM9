@@ -40,7 +40,7 @@ public class ReservationController extends BaseController<Reservation, Reservati
     @Override
     public Iterable<Reservation> all() {return super.all();}
 
-    @GetMapping(path = "/api/reservations/today ")
+    @GetMapping(path = "/api/reservations/today")
     @PreAuthorize("hasRole('ROLE_OPERATOR')")
     @ResponseBody
     public ResponseEntity allToday() {
